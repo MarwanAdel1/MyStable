@@ -11,7 +11,8 @@
 
     <color name="grey">#EFE5FD</color>
     <color name="very_light_pink">#faf7f3</color>
-    
-    
-    <color name="text_color">#232f38</color>
+
+
+    <color name="text_color_black">#232f38</color>
+    <color name="text_color_very_light_brown">#d4b287</color>
 </resources>

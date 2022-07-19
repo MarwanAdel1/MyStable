@@ -78,27 +78,38 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/tabs_recycler"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="22dp"
                 android:layout_marginTop="20dp"
                 android:background="@color/very_light_pink"
                 android:orientation="horizontal"
-                tools:listitem="@layout/tabs_item"
+                android:overScrollMode="never"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:itemCount="10"
+                tools:listitem="@layout/tabs_item" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/tab_details_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginStart="22dp"
-                android:layout_marginTop="26dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="22.8dp"
                 android:orientation="vertical"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tabs_recycler"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintVertical_bias="0.0"
+                app:spanCount="2"
+                tools:itemCount="7"
+                tools:listitem="@layout/tab_details_item" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
