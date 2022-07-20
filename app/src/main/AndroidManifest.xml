@@ -14,7 +14,7 @@
         android:theme="@style/Theme.MyStable"
         tools:targetApi="31">
         <activity
-            android:name=".screens.marketplace_screen.view.MarketplaceScreen"
+            android:name=".screens.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

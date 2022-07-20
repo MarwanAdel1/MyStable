@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation.xml"
+    app:startDestination="@id/marketplaceFragment">
+
+    <fragment
+        android:id="@+id/marketplaceFragment"
+        android:name="com.example.mystable.screens.marketplace_fragment.view.MarketplaceFragment"
+        android:label="MarketplaceFragment" />
+</navigation>

@@ -1,4 +1,4 @@
-package com.example.mystable.screens.marketplace_screen.viewmodel
+package com.example.mystable.screens.marketplace_fragment.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
