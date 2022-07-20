@@ -39,7 +39,7 @@ class MarketplaceFragment : Fragment(), FragmentCommunicator {
 
         tabsAdapter = TabsAdapter(emptyList(), this)
         binding.tabsRecycler.adapter = tabsAdapter
-        tabItemsAdapter = TabDetailsAdapter(emptyList())
+        tabItemsAdapter = TabDetailsAdapter(requireContext(), emptyList())
         binding.tabDetailsRecycler.adapter = tabItemsAdapter
 
         viewModelFactory = MarketPlaceViewModelFactory(
@@ -50,6 +50,7 @@ class MarketplaceFragment : Fragment(), FragmentCommunicator {
             ViewModelProvider(this, viewModelFactory)[MarketPlaceViewModel::
             class.java]
 
+        binding.progressIndicator.visibility = View.VISIBLE
         viewModel.getTabsInfo(true)
 
         viewModel.tabsInfoLiveData.observe(viewLifecycleOwner) {
@@ -64,6 +65,7 @@ class MarketplaceFragment : Fragment(), FragmentCommunicator {
 
         viewModel.tabDetailsLiveData.observe(viewLifecycleOwner) {
             println(it)
+            binding.progressIndicator.visibility = View.INVISIBLE
             if (it != null) {
                 binding.tabDetailsRecycler.visibility = View.VISIBLE
                 tabItemsAdapter.setTabDetails(it.tabItems)
@@ -75,6 +77,7 @@ class MarketplaceFragment : Fragment(), FragmentCommunicator {
 
     override fun showDataForClickedItem(tab: TabInfo) {
         binding.tabDetailsRecycler.visibility = View.INVISIBLE
+        binding.progressIndicator.visibility = View.VISIBLE
 //        tabItemsAdapter.setTabDetails(emptyList())
         viewModel.getTabDetails(tab.id)
     }

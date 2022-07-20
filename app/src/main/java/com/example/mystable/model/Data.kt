@@ -6,6 +6,8 @@ import com.example.mystable.pojo.TabItems
 
 class Data {
     companion object {
+        val imageUrl = "https://media.istockphoto.com/photos/the-bay-horse-gallops-on-the-grass-picture-id1209008843?s=612x612"
+
         val tabs = listOf<TabInfo>(
             TabInfo("1", "All"),
             TabInfo("2", "Horse Trading"),
@@ -13,7 +15,7 @@ class Data {
             TabInfo("4", "Stable for rent")
         )
 
-        //2 excluded
+        //id 2 is excluded
         val tabsDetails = listOf<TabDetails>(
             TabDetails(
                 "5",

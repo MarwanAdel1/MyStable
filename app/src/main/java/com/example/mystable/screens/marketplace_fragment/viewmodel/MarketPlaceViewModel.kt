@@ -8,6 +8,7 @@ import com.example.mystable.model.IMarketplaceRepo
 import com.example.mystable.pojo.TabDetails
 import com.example.mystable.pojo.TabInfo
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -20,6 +21,8 @@ class MarketPlaceViewModel(private val marketplaceRepo: IMarketplaceRepo) : View
     val tabDetailsLiveData: LiveData<TabDetails>
         get() = tabDetailsMutableLiveData
 
+    private var tabDetailsJob: Job? = null
+
     fun getTabsInfo(flag: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
             val tabs =
@@ -31,7 +34,8 @@ class MarketPlaceViewModel(private val marketplaceRepo: IMarketplaceRepo) : View
     }
 
     fun getTabDetails(id: String) {
-        viewModelScope.launch(Dispatchers.IO) {
+        tabDetailsJob?.cancel()
+        tabDetailsJob = viewModelScope.launch(Dispatchers.IO) {
             val details = marketplaceRepo.getTabDetails(id)
             withContext(Dispatchers.Main) {
                 tabDetailsMutableLiveData.postValue(details)

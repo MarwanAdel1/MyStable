@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/item_view"
         android:layout_width="160dp"
         android:layout_height="148dp"
         android:layout_margin="10dp">
 
         <ImageView
-            android:contentDescription="item image"
             android:id="@+id/item_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/shape_rounded_corner_image_view"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -23,8 +20,10 @@
 
         <TextView
             android:id="@+id/item_name"
-            android:layout_width="104dp"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:maxLines="1"
+            android:fontFamily="@font/sfpro_bold"
+            android:layout_height="19dp"
             android:layout_marginStart="10dp"
             android:textColor="@color/white"
             android:textSize="16sp"
@@ -32,9 +31,10 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
+            android:fontFamily="@font/sfpro_bold"
             android:id="@+id/item_price"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="14dp"
             android:layout_marginStart="10dp"
             android:layout_marginBottom="10dp"
             android:textColor="@color/text_color_very_light_brown"

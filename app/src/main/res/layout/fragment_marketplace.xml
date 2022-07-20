@@ -19,13 +19,14 @@
             android:background="@color/white"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-
+            <Button
                 android:id="@+id/country_tx"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="17.6dp"
                 android:layout_marginStart="22.4dp"
+                android:background="@android:color/transparent"
+                android:drawableEnd="@drawable/icon_down_arrow"
                 android:text="@string/country_name_marketplace"
                 android:textColor="@color/black"
                 android:textSize="25sp"
@@ -34,14 +35,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:layout_width="14dp"
-                android:layout_height="14dp"
-                android:layout_marginVertical="8dp"
-                android:layout_marginStart="10dp"
-                android:src="@drawable/icon_down_arrow"
-                app:layout_constraintStart_toEndOf="@id/country_tx"
-                app:layout_constraintTop_toTopOf="@id/country_tx" />
 
             <ImageView
                 android:id="@+id/plus_imageview"
@@ -81,11 +74,11 @@
                 android:id="@+id/tabs_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginStart="22dp"
                 android:layout_marginTop="20dp"
                 android:background="@color/very_light_pink"
                 android:orientation="horizontal"
                 android:overScrollMode="never"
+                android:paddingStart="22dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -97,11 +90,10 @@
                 android:id="@+id/tab_details_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginStart="22dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="22.8dp"
                 android:orientation="vertical"
                 android:overScrollMode="never"
+                android:paddingHorizontal="22dp"
+                android:paddingTop="20dp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -114,6 +106,15 @@
                 tools:listitem="@layout/tab_details_item" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ProgressBar
+            android:id="@+id/progress_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
