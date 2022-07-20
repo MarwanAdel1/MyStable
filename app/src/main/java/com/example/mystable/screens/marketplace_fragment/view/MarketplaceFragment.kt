@@ -11,20 +11,23 @@ import com.example.mystable.R
 import com.example.mystable.databinding.FragmentMarketplaceBinding
 import com.example.mystable.model.Repo
 import com.example.mystable.network.BackendServer
+import com.example.mystable.pojo.TabInfo
 import com.example.mystable.screens.marketplace_fragment.viewmodel.MarketPlaceViewModel
 import com.example.mystable.screens.marketplace_fragment.viewmodel.MarketPlaceViewModelFactory
 
 
-class MarketplaceFragment : Fragment() {
+class MarketplaceFragment : Fragment(), FragmentCommunicator {
     private lateinit var binding: FragmentMarketplaceBinding
 
     private lateinit var viewModel: MarketPlaceViewModel
     private lateinit var viewModelFactory: MarketPlaceViewModelFactory
 
+    private lateinit var tabsAdapter: TabsAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate<FragmentMarketplaceBinding>(
             inflater,
@@ -32,6 +35,9 @@ class MarketplaceFragment : Fragment() {
             container,
             false
         )
+
+        tabsAdapter = TabsAdapter(emptyList(), this)
+        binding.tabsRecycler.adapter = tabsAdapter
 
         viewModelFactory = MarketPlaceViewModelFactory(
             Repo.getInstance(BackendServer.getInstance())
@@ -49,10 +55,21 @@ class MarketplaceFragment : Fragment() {
                 it.forEach {
                     println(it.name)
                 }
+                tabsAdapter.setTabsInfo(it)
             }
         }
 
+        viewModel.tabDetailsLiveData.observe(viewLifecycleOwner) {
+            println(it)
+            if (it != null) {
+                println("Welcome Data\n")
+            }
+        }
 
         return binding.root
+    }
+
+    override fun showDataForClickedItem(tab: TabInfo) {
+        viewModel.getTabDetails(tab.id)
     }
 }

@@ -17,15 +17,11 @@ class Repo private constructor(private val backendServer: BackendServer) : IMark
         return backendServer.getTabsInfo()
     }
 
-    override suspend fun getTabDetails(): List<TabDetails> {
-        return backendServer.getTabDetails()
+    override suspend fun getTabDetails(id: String): TabDetails? {
+        return backendServer.getTabDetails(id)
     }
 
     override suspend fun getEmptyTabsInfo(): List<TabInfo> {
         return backendServer.getEmptyTabsInfo()
-    }
-
-    override suspend fun getEmptyTabDetails(): List<TabDetails> {
-        return backendServer.getEmptyTabDetails()
     }
 }
