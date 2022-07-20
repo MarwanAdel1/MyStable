@@ -37,6 +37,7 @@ class TabsAdapter(
             tabName.text = tabs[position].name
 
             if (position == row_index) {
+                communicator.showDataForClickedItem(tabs[row_index])
                 tabsView.setBackgroundResource(R.drawable.shape_rounded_corner_tabs_selected)
                 tabName.setTextColor(Color.parseColor("#FFFFFF"))
             } else {
@@ -47,7 +48,6 @@ class TabsAdapter(
             tabsView.setOnClickListener {
                 row_index = position
                 notifyDataSetChanged()
-                communicator.showDataForClickedItem(tabs[position])
             }
         }
     }

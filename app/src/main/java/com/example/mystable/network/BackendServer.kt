@@ -15,18 +15,18 @@ class BackendServer private constructor() {
     }
 
     suspend fun getTabsInfo(): List<TabInfo> {
-        delay(10000)
+        delay(5000)
         return Data.tabs
     }
 
     suspend fun getEmptyTabsInfo(): List<TabInfo> {
-        delay(10000)
+        delay(5000)
         return emptyList()
     }
 
     suspend fun getTabDetails(id: String): TabDetails? {
         val details = getTabDetailsById(id)
-        delay(10000)
+        delay(5000)
         return details
     }
 

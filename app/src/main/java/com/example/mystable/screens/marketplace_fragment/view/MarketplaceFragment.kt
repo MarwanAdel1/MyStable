@@ -23,6 +23,7 @@ class MarketplaceFragment : Fragment(), FragmentCommunicator {
     private lateinit var viewModelFactory: MarketPlaceViewModelFactory
 
     private lateinit var tabsAdapter: TabsAdapter
+    private lateinit var tabItemsAdapter: TabDetailsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +39,8 @@ class MarketplaceFragment : Fragment(), FragmentCommunicator {
 
         tabsAdapter = TabsAdapter(emptyList(), this)
         binding.tabsRecycler.adapter = tabsAdapter
+        tabItemsAdapter = TabDetailsAdapter(emptyList())
+        binding.tabDetailsRecycler.adapter = tabItemsAdapter
 
         viewModelFactory = MarketPlaceViewModelFactory(
             Repo.getInstance(BackendServer.getInstance())
@@ -51,10 +54,10 @@ class MarketplaceFragment : Fragment(), FragmentCommunicator {
 
         viewModel.tabsInfoLiveData.observe(viewLifecycleOwner) {
             if (it != null) {
-                println("Welcome Data\n")
-                it.forEach {
-                    println(it.name)
-                }
+//                println("Welcome Data\n")
+//                it.forEach {
+//                    println(it.name)
+//                }
                 tabsAdapter.setTabsInfo(it)
             }
         }
@@ -62,7 +65,8 @@ class MarketplaceFragment : Fragment(), FragmentCommunicator {
         viewModel.tabDetailsLiveData.observe(viewLifecycleOwner) {
             println(it)
             if (it != null) {
-                println("Welcome Data\n")
+                binding.tabDetailsRecycler.visibility = View.VISIBLE
+                tabItemsAdapter.setTabDetails(it.tabItems)
             }
         }
 
@@ -70,6 +74,8 @@ class MarketplaceFragment : Fragment(), FragmentCommunicator {
     }
 
     override fun showDataForClickedItem(tab: TabInfo) {
+        binding.tabDetailsRecycler.visibility = View.INVISIBLE
+//        tabItemsAdapter.setTabDetails(emptyList())
         viewModel.getTabDetails(tab.id)
     }
 }
