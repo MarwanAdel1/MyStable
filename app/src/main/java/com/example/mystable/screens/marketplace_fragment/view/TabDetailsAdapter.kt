@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mystable.R
 import com.example.mystable.databinding.ItemTabDetailsBinding
-import com.example.mystable.model.Data
+import com.example.mystable.model.MarketPlaceDataSource
 import com.example.mystable.pojo.TabItems
 
 class TabDetailsAdapter(
@@ -38,7 +38,7 @@ class TabDetailsAdapter(
             itemName.text = tabItems[position].name
             itemPrice.text = "${tabItems[position].currencySymbol} ${tabItems[position].price}"
             Glide.with(myContext)
-                .load(Data.imageUrl)
+                .load(MarketPlaceDataSource.imageUrl)
                 .placeholder(R.drawable.ic_launcher_background)
                 .centerCrop()
                 .into(itemImage)

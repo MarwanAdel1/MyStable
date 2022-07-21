@@ -1,6 +1,6 @@
 package com.example.mystable.network
 
-import com.example.mystable.model.Data
+import com.example.mystable.model.MarketPlaceDataSource
 import com.example.mystable.pojo.TabDetails
 import com.example.mystable.pojo.TabInfo
 import kotlinx.coroutines.delay
@@ -16,7 +16,7 @@ class BackendServer private constructor() {
 
     suspend fun getTabsInfo(): List<TabInfo> {
         delay(5000)
-        return Data.tabs
+        return MarketPlaceDataSource.tabs
     }
 
     suspend fun getEmptyTabsInfo(): List<TabInfo> {
@@ -34,7 +34,7 @@ class BackendServer private constructor() {
     private fun getTabDetailsById(id: String): TabDetails? {
         var details: TabDetails? = null
 
-        for (tabDetails in Data.tabsDetails) {
+        for (tabDetails in MarketPlaceDataSource.tabsDetails) {
             if (tabDetails.id == id) {
                 details = tabDetails
                 break

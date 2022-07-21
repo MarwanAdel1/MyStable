@@ -4,7 +4,7 @@ import com.example.mystable.pojo.TabDetails
 import com.example.mystable.pojo.TabInfo
 import com.example.mystable.pojo.TabItems
 
-class Data {
+class MarketPlaceDataSource {
     companion object {
         val imageUrl = "https://media.istockphoto.com/photos/the-bay-horse-gallops-on-the-grass-picture-id1209008843?s=612x612"
 
