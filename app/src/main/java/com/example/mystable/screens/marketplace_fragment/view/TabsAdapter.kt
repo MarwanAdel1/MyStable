@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mystable.R
-import com.example.mystable.databinding.TabsItemBinding
+import com.example.mystable.databinding.ItemTabsBinding
 import com.example.mystable.pojo.TabInfo
 
 class TabsAdapter(
@@ -22,9 +22,9 @@ class TabsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
-        val view = DataBindingUtil.inflate<TabsItemBinding>(
+        val view = DataBindingUtil.inflate<ItemTabsBinding>(
             layoutInflater,
-            R.layout.tabs_item,
+            R.layout.item_tabs,
             parent,
             false
         )
@@ -56,5 +56,5 @@ class TabsAdapter(
         return tabs.size
     }
 
-    inner class ViewHolder(val binding: TabsItemBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ViewHolder(val binding: ItemTabsBinding) : RecyclerView.ViewHolder(binding.root)
 }

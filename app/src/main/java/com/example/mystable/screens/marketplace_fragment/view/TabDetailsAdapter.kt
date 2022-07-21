@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mystable.R
-import com.example.mystable.databinding.TabDetailsItemBinding
+import com.example.mystable.databinding.ItemTabDetailsBinding
 import com.example.mystable.model.Data
 import com.example.mystable.pojo.TabItems
 
@@ -23,9 +23,9 @@ class TabDetailsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
-        val view = DataBindingUtil.inflate<TabDetailsItemBinding>(
+        val view = DataBindingUtil.inflate<ItemTabDetailsBinding>(
             layoutInflater,
-            R.layout.tab_details_item,
+            R.layout.item_tab_details,
             parent,
             false
         )
@@ -55,6 +55,6 @@ class TabDetailsAdapter(
         return tabItems.size
     }
 
-    inner class ViewHolder(val binding: TabDetailsItemBinding) :
+    inner class ViewHolder(val binding: ItemTabDetailsBinding) :
         RecyclerView.ViewHolder(binding.root)
 }

@@ -51,24 +51,31 @@ class MarketplaceFragment : Fragment(), FragmentCommunicator {
             class.java]
 
         binding.progressIndicator.visibility = View.VISIBLE
-        viewModel.getTabsInfo(true)
+        viewModel.getTabsInfo(true) // true for getting data - false for getting no data
 
         viewModel.tabsInfoLiveData.observe(viewLifecycleOwner) {
+            binding.progressIndicator.visibility = View.INVISIBLE
             if (it != null) {
-//                println("Welcome Data\n")
-//                it.forEach {
-//                    println(it.name)
-//                }
-                tabsAdapter.setTabsInfo(it)
+                if (it.isEmpty()) {
+                    binding.mainConstraint.visibility = View.INVISIBLE
+                    binding.placeholderTab.visibility = View.VISIBLE
+                } else {
+                    tabsAdapter.setTabsInfo(it)
+                    binding.mainConstraint.visibility = View.VISIBLE
+                    binding.placeholderTab.visibility = View.INVISIBLE
+                }
             }
         }
 
         viewModel.tabDetailsLiveData.observe(viewLifecycleOwner) {
-            println(it)
             binding.progressIndicator.visibility = View.INVISIBLE
             if (it != null) {
                 binding.tabDetailsRecycler.visibility = View.VISIBLE
                 tabItemsAdapter.setTabDetails(it.tabItems)
+                binding.placeholderTabDetails.visibility = View.INVISIBLE
+            } else {
+                binding.tabDetailsRecycler.visibility = View.INVISIBLE
+                binding.placeholderTabDetails.visibility = View.VISIBLE
             }
         }
 
@@ -77,6 +84,7 @@ class MarketplaceFragment : Fragment(), FragmentCommunicator {
 
     override fun showDataForClickedItem(tab: TabInfo) {
         binding.tabDetailsRecycler.visibility = View.INVISIBLE
+        binding.placeholderTabDetails.visibility = View.INVISIBLE
         binding.progressIndicator.visibility = View.VISIBLE
 //        tabItemsAdapter.setTabDetails(emptyList())
         viewModel.getTabDetails(tab.id)

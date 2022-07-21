@@ -1,0 +1,45 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/no_item_image"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/image_img_market_place_empty"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3" />
+
+    <TextView
+        android:id="@+id/no_item_yet_tx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/sfpro_bold"
+        android:text="@string/no_items_yet"
+        android:textColor="@color/dark_beige"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/no_item_image" />
+
+
+    <TextView
+        android:layout_width="243dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="66dp"
+        android:layout_marginEnd="66dp"
+        android:text="@string/marketplace_is_not_available_yet_to_this_location"
+        android:textAlignment="center"
+        android:textColor="@color/text_color_black"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/no_item_yet_tx" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
