@@ -3,57 +3,59 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parentConstraint"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".screens.MainActivity">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/bar_constraint"
             android:layout_width="match_parent"
-            android:layout_height="65.2dp"
+            android:layout_height="wrap_content"
             android:background="@color/white"
             app:layout_constraintTop_toTopOf="parent">
 
             <Button
-                android:id="@+id/country_tx"
+                android:id="@+id/country_bt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="17.6dp"
-                android:layout_marginStart="22.4dp"
-                android:background="@android:color/transparent"
+                android:layout_marginHorizontal="22dp"
+                android:layout_marginVertical="18dp"
+                android:background="@drawable/ripple_country_button"
                 android:drawableEnd="@drawable/icon_down_arrow"
-                android:text="@string/country_name_marketplace"
+                android:lines="1"
+                android:maxWidth="230dp"
+                android:textAlignment="viewStart"
                 android:textColor="@color/black"
                 android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/plus_imageview"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/country_name_marketplace" />
 
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/plus_imageview"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginEnd="23.6dp"
-                android:background="@drawable/shape_rounded_corner_image_buttons"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/ripple_plus_button"
                 android:src="@drawable/icon_plus"
                 app:layout_constraintBottom_toBottomOf="@id/search_imageview"
                 app:layout_constraintEnd_toStartOf="@id/search_imageview"
                 app:layout_constraintTop_toTopOf="@id/search_imageview" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/search_imageview"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginVertical="17.6dp"
+                android:layout_marginVertical="18dp"
                 android:layout_marginEnd="30dp"
+                android:background="@drawable/ripple_rounded_corner_view_unselected"
                 android:src="@drawable/icon_search"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -67,58 +69,79 @@
             android:layout_height="0dp"
             android:background="@color/very_light_pink"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/bar_constraint">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/tabs_recycler"
+            <FrameLayout
+                android:id="@+id/tabs_recycler_layout"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="20dp"
-                android:background="@color/very_light_pink"
-                android:orientation="horizontal"
-                android:overScrollMode="never"
-                android:paddingStart="22dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:itemCount="10"
-                tools:listitem="@layout/item_tabs" />
+                app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/tab_details_recycler"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/tabs_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:clipToPadding="false"
+                    android:orientation="horizontal"
+                    android:overScrollMode="never"
+                    android:paddingHorizontal="22dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="10"
+                    tools:listitem="@layout/item_category" />
+
+            </FrameLayout>
+
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipeCategoryDetail"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:orientation="vertical"
-                android:overScrollMode="never"
-                android:paddingHorizontal="22dp"
-                android:paddingTop="20dp"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tabs_recycler"
-                app:layout_constraintVertical_bias="0.0"
-                app:spanCount="2"
-                tools:itemCount="7"
-                tools:listitem="@layout/item_tab_details" />
-
-            <include
-                android:id="@+id/placeholder_tab_details"
-                layout="@layout/placeholder_no_items"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="20dp"
-                android:background="@color/very_light_pink"
-                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tabs_recycler" />
+                app:layout_constraintTop_toBottomOf="@id/tabs_recycler_layout">
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/tab_details_recycler"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="20dp"
+                            android:clipToPadding="false"
+                            android:orientation="vertical"
+                            android:overScrollMode="never"
+                            android:paddingHorizontal="20dp"
+                            android:visibility="gone"
+                            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                            app:spanCount="2"
+                            tools:itemCount="7"
+                            tools:listitem="@layout/item_category_details" />
+
+                    </FrameLayout>
+
+                    <include
+                        android:id="@+id/placeholder_tab_details"
+                        layout="@layout/placeholder_no_items"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:background="@color/very_light_pink"
+                        android:visibility="gone" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ProgressBar
@@ -130,17 +153,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <include
-            android:id="@+id/placeholder_tab"
-            layout="@layout/placeholder_no_items"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeAll"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:visibility="gone"
-            android:background="@color/very_light_pink"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/bar_constraint" />
+            app:layout_constraintTop_toBottomOf="@id/bar_constraint">
 
+            <include
+                android:id="@+id/placeholder_tab"
+                layout="@layout/placeholder_no_items"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/very_light_pink"
+                android:visibility="gone" />
+
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,6 +1,6 @@
 package com.example.mystable.pojo
 
-data class TabInfo(
+data class Category(
     val id: String,
     val name: String
 )

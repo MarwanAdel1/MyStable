@@ -7,25 +7,25 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mystable.R
-import com.example.mystable.databinding.ItemTabDetailsBinding
-import com.example.mystable.model.MarketPlaceDataSource
-import com.example.mystable.pojo.TabItems
+import com.example.mystable.databinding.ItemCategoryDetailsBinding
+import com.example.mystable.model.DataSource
+import com.example.mystable.pojo.CategoryDetailsItems
 
 class TabDetailsAdapter(
     private val myContext: Context,
-    private var tabItems: List<TabItems>
+    private var categoryDetailsItems: List<CategoryDetailsItems>
 ) : RecyclerView.Adapter<TabDetailsAdapter.ViewHolder>() {
 
-    fun setTabDetails(tabItems: List<TabItems>) {
-        this.tabItems = tabItems
+    fun setTabDetails(categoryDetailsItems: List<CategoryDetailsItems>) {
+        this.categoryDetailsItems = categoryDetailsItems
         notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
-        val view = DataBindingUtil.inflate<ItemTabDetailsBinding>(
+        val view = DataBindingUtil.inflate<ItemCategoryDetailsBinding>(
             layoutInflater,
-            R.layout.item_tab_details,
+            R.layout.item_category_details,
             parent,
             false
         )
@@ -35,10 +35,11 @@ class TabDetailsAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.apply {
-            itemName.text = tabItems[position].name
-            itemPrice.text = "${tabItems[position].currencySymbol} ${tabItems[position].price}"
+            itemName.text = categoryDetailsItems[position].name
+            itemPrice.text =
+                "${categoryDetailsItems[position].currencySymbol} ${categoryDetailsItems[position].price}"
             Glide.with(myContext)
-                .load(MarketPlaceDataSource.imageUrl)
+                .load(DataSource.imageUrl)
                 .placeholder(R.drawable.ic_launcher_background)
                 .centerCrop()
                 .into(itemImage)
@@ -52,9 +53,9 @@ class TabDetailsAdapter(
     }
 
     override fun getItemCount(): Int {
-        return tabItems.size
+        return categoryDetailsItems.size
     }
 
-    inner class ViewHolder(val binding: ItemTabDetailsBinding) :
+    inner class ViewHolder(val binding: ItemCategoryDetailsBinding) :
         RecyclerView.ViewHolder(binding.root)
 }

@@ -1,6 +1,6 @@
 package com.example.mystable.pojo
 
-data class TabItems(
+data class CategoryDetailsItems(
     val id: String,
     val name: String,
     val imageUrl: String,

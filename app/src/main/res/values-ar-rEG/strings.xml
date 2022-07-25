@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">استابل</string>
+    <string name="country_name_marketplace">مصر</string>
+
+    <string name="no_items_yet">لا يوجـد عنصر حتى الآن</string>
+    <string name="marketplace_is_not_available">السوق غير متاح بعد لهذا الموقع</string>
+</resources>

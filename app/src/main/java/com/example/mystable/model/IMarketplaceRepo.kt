@@ -1,12 +1,9 @@
 package com.example.mystable.model
 
-import com.example.mystable.pojo.TabDetails
-import com.example.mystable.pojo.TabItems
-import com.example.mystable.pojo.TabInfo
+import com.example.mystable.pojo.Category
+import com.example.mystable.pojo.CategoryDetails
 
 interface IMarketplaceRepo {
-    suspend fun getTabsInfo(): List<TabInfo>
-    suspend fun getTabDetails(id: String): TabDetails?
-
-    suspend fun getEmptyTabsInfo(): List<TabInfo>
+    suspend fun getCategories(flag: Boolean): List<Category>
+    suspend fun getCategoryDetails(id: String): CategoryDetails?
 }
