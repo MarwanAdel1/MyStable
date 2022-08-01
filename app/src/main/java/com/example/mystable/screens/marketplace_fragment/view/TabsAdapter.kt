@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mystable.R
 import com.example.mystable.databinding.ItemCategoryBinding
@@ -15,7 +14,7 @@ class TabsAdapter(
     private var tabs: List<Category>,
     private var communicator: MarketplaceCategoriesCallBack
 ) : RecyclerView.Adapter<TabsAdapter.MarketplaceCategoryViewHolder>() {
-    var rowIndex = 0
+    private var rowIndex = 0
 
     fun setTabsInfo(tabs: List<Category>) {
         this.tabs = tabs
@@ -27,12 +26,7 @@ class TabsAdapter(
         viewType: Int
     ): MarketplaceCategoryViewHolder {
         val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
-        val view = DataBindingUtil.inflate<ItemCategoryBinding>(
-            layoutInflater,
-            R.layout.item_category,
-            parent,
-            false
-        )
+        val view = ItemCategoryBinding.inflate(layoutInflater, parent, false)
 
         return MarketplaceCategoryViewHolder(view)
     }
@@ -41,19 +35,20 @@ class TabsAdapter(
         holder.binding.apply {
             tabName.text = tabs[position].name
 
-            if (position == rowIndex) {
-                communicator.showDataForClickedItem(tabs[rowIndex])
+            if (rowIndex == position) {
+                communicator.showDataForClickedItem(tabs[position])
                 tabsView.setBackgroundResource(R.drawable.shape_rounded_corner_tabs_selected)
                 tabName.setTextColor(ContextCompat.getColor(myContext, R.color.white))
             } else {
-                tabsView.setBackgroundResource(R.drawable.ripple_rounded_corner_view_unselected)
+                tabsView.setBackgroundResource(R.drawable.shape_rounded_corner_image_btn_white_view)
                 tabName.setTextColor(ContextCompat.getColor(myContext, R.color.black))
             }
 
             tabsView.setOnClickListener {
                 if (rowIndex != position) {
+                    notifyItemChanged(rowIndex)
                     rowIndex = position
-                    notifyDataSetChanged()
+                    notifyItemChanged(rowIndex)
                 }
             }
         }

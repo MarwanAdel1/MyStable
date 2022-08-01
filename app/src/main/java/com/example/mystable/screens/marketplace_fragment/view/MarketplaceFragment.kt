@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import com.example.mystable.R
 import com.example.mystable.databinding.FragmentMarketplaceBinding
 import com.example.mystable.model.MarketplaceRepo
@@ -30,12 +32,7 @@ class MarketplaceFragment : Fragment(), MarketplaceCategoriesCallBack {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.fragment_marketplace,
-            container,
-            false
-        )
+        binding = FragmentMarketplaceBinding.inflate(inflater, container, false)
 
         return binding.root
     }
@@ -75,8 +72,7 @@ class MarketplaceFragment : Fragment(), MarketplaceCategoriesCallBack {
         binding.swipeAll.setOnRefreshListener {
             binding.swipeAll.isRefreshing = false
             binding.progressIndicator.visibility = View.VISIBLE
-            binding.mainConstraint.visibility = View.INVISIBLE
-            binding.placeholderTab.visibility = View.INVISIBLE
+            binding.placeholderView.root.visibility = View.GONE
 
             viewModel.getCategory(true)
         }
@@ -84,8 +80,8 @@ class MarketplaceFragment : Fragment(), MarketplaceCategoriesCallBack {
         binding.swipeCategoryDetail.setOnRefreshListener {
             binding.swipeCategoryDetail.isRefreshing = false
             binding.progressIndicator.visibility = View.VISIBLE
-            binding.tabDetailsRecycler.visibility = View.INVISIBLE
-            binding.placeholderTabDetails.visibility = View.INVISIBLE
+            binding.tabDetailsRecycler.visibility = View.GONE
+            binding.placeholderView.root.visibility = View.GONE
 
             viewModel.refreshCategoryDetails()
         }
@@ -93,44 +89,66 @@ class MarketplaceFragment : Fragment(), MarketplaceCategoriesCallBack {
 
     private fun initObservers() {
         viewModel.categoryLiveData.observe(viewLifecycleOwner) {
-            binding.progressIndicator.visibility = View.INVISIBLE
+            binding.progressIndicator.visibility = View.GONE
+            updatePlaceholderLayoutParams(true)
             if (it.isNullOrEmpty()) {
                 binding.swipeAll.visibility = View.VISIBLE
                 binding.swipeAll.isEnabled = true
                 binding.swipeCategoryDetail.isEnabled = false
-                binding.mainConstraint.visibility = View.INVISIBLE
-                binding.placeholderTab.visibility = View.VISIBLE
+                binding.placeholderView.root.visibility = View.VISIBLE
             } else {
                 tabsAdapter.setTabsInfo(it)
                 binding.swipeAll.isEnabled = false
                 binding.swipeCategoryDetail.isEnabled = true
-                binding.mainConstraint.visibility = View.VISIBLE
-                binding.placeholderTab.visibility = View.INVISIBLE
+                binding.placeholderView.root.visibility = View.GONE
             }
         }
 
         viewModel.categoryDetailsLiveData.observe(viewLifecycleOwner) {
             binding.progressIndicator.visibility = View.INVISIBLE
+            updatePlaceholderLayoutParams(false)
             if (it != null) {
                 tabItemsAdapter.setTabDetails(it.categoryDetailsItems)
                 binding.tabDetailsRecycler.visibility = View.VISIBLE
-                binding.placeholderTabDetails.visibility = View.INVISIBLE
+                binding.placeholderView.root.visibility = View.GONE
             } else {
-                binding.tabDetailsRecycler.visibility = View.INVISIBLE
-                binding.placeholderTabDetails.visibility = View.VISIBLE
+                binding.tabDetailsRecycler.visibility = View.GONE
+                binding.placeholderView.root.visibility = View.VISIBLE
             }
         }
 
         viewModel.selectedCategoryLiveData.observe(viewLifecycleOwner) {
-            println("Hello Everybody")
+            println("Selected ID: $it")
         }
     }
 
     override fun showDataForClickedItem(tab: Category) {
         binding.tabDetailsRecycler.visibility = View.INVISIBLE
-        binding.placeholderTabDetails.visibility = View.INVISIBLE
+        binding.placeholderView.root.visibility = View.INVISIBLE
         binding.progressIndicator.visibility = View.VISIBLE
 //        tabItemsAdapter.setTabDetails(emptyList())
         viewModel.getCategoryDetails(tab.id)
+    }
+
+    private fun updatePlaceholderLayoutParams(isFull: Boolean) {
+        val layoutParams: ConstraintLayout.LayoutParams =
+            binding.placeholderView.root.layoutParams as ConstraintLayout.LayoutParams
+        if (isFull) {
+            layoutParams.topToBottom = binding.headView.id
+            binding.placeholderView.root.setBackgroundColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.white
+                )
+            )
+        } else {
+            layoutParams.topToBottom = binding.tabsRecyclerLayout.id
+            binding.placeholderView.root.setBackgroundColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.very_light_pink
+                )
+            )
+        }
     }
 }

@@ -12,15 +12,15 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class MarketPlaceViewModel(private val marketplaceRepo: IMarketplaceRepo) : ViewModel() {
-    private var selectedCategoryMutableLiveData = MutableLiveData<String>()
+    private val selectedCategoryMutableLiveData = MutableLiveData<String>()
     val selectedCategoryLiveData: LiveData<String>
         get() = selectedCategoryMutableLiveData
 
-    private var categoryMutableLiveData = MutableLiveData<List<Category>>()
+    private val categoryMutableLiveData = MutableLiveData<List<Category>>()
     val categoryLiveData: LiveData<List<Category>>
         get() = categoryMutableLiveData
 
-    private var categoryDetailsMutableLiveData = MutableLiveData<CategoryDetails?>()
+    private val categoryDetailsMutableLiveData = MutableLiveData<CategoryDetails?>()
     val categoryDetailsLiveData: LiveData<CategoryDetails?>
         get() = categoryDetailsMutableLiveData
 

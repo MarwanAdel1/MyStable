@@ -7,38 +7,44 @@
         android:id="@+id/no_item_image"
         android:layout_width="120dp"
         android:layout_height="120dp"
+        android:layout_marginBottom="40dp"
         android:src="@drawable/image_img_market_place_empty"
+        app:layout_constraintBottom_toTopOf="@id/no_item_yet_tx"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/no_item_yet_tx"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:fontFamily="@font/sfpro_bold"
+        android:maxLines="1"
+        android:text="@string/no_items_yet"
+        android:textAlignment="center"
+        android:textColor="@color/dark_beige"
+        android:textSize="26sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3" />
+        app:layout_constraintWidth_percent="0.7" />
 
     <TextView
-        android:id="@+id/no_item_yet_tx"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:fontFamily="@font/sfpro_bold"
-        android:text="@string/no_items_yet"
-        android:textAlignment="center"
-        android:textColor="@color/dark_beige"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/no_item_image" />
-
-    <TextView
+        android:id="@+id/marketplace_msg_tx"
         android:layout_width="0dp"
-        android:layout_height="36dp"
-        android:layout_marginHorizontal="66dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:maxLines="2"
         android:text="@string/marketplace_is_not_available"
         android:textAlignment="center"
         android:textColor="@color/text_color_black"
-        android:textSize="15sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/no_item_yet_tx" />
+        app:layout_constraintTop_toBottomOf="@id/no_item_yet_tx"
+        app:layout_constraintWidth_percent="0.7" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

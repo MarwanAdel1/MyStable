@@ -3,7 +3,6 @@ package com.example.mystable.screens.marketplace_fragment.view
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mystable.R
@@ -14,26 +13,24 @@ import com.example.mystable.pojo.CategoryDetailsItems
 class TabDetailsAdapter(
     private val myContext: Context,
     private var categoryDetailsItems: List<CategoryDetailsItems>
-) : RecyclerView.Adapter<TabDetailsAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<TabDetailsAdapter.MarketplaceCategoryDetailsViewHolder>() {
 
     fun setTabDetails(categoryDetailsItems: List<CategoryDetailsItems>) {
         this.categoryDetailsItems = categoryDetailsItems
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): MarketplaceCategoryDetailsViewHolder {
         val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
-        val view = DataBindingUtil.inflate<ItemCategoryDetailsBinding>(
-            layoutInflater,
-            R.layout.item_category_details,
-            parent,
-            false
-        )
+        val view = ItemCategoryDetailsBinding.inflate(layoutInflater, parent, false)
 
-        return ViewHolder(view)
+        return MarketplaceCategoryDetailsViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MarketplaceCategoryDetailsViewHolder, position: Int) {
         holder.binding.apply {
             itemName.text = categoryDetailsItems[position].name
             itemPrice.text =
@@ -56,6 +53,6 @@ class TabDetailsAdapter(
         return categoryDetailsItems.size
     }
 
-    inner class ViewHolder(val binding: ItemCategoryDetailsBinding) :
+    inner class MarketplaceCategoryDetailsViewHolder(val binding: ItemCategoryDetailsBinding) :
         RecyclerView.ViewHolder(binding.root)
 }
