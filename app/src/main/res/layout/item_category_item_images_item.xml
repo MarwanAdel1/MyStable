@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_images_constraint"
+    android:layout_width="match_parent"
+    android:layout_height="186dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="10dp"
+    android:background="@drawable/shape_rounded_corner_image_view">
+
+    <ImageView
+        android:contentDescription="@string/image_for_item"
+        android:id="@+id/item_images_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/shape_rounded_corner_image_view" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

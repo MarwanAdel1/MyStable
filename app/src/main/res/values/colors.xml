@@ -12,8 +12,18 @@
     <color name="grey">#EFE5FD</color>
     <color name="very_light_pink">#faf7f3</color>
     <color name="dark_beige">#a98264</color>
+    <color name="pale">#f4e8d8</color>
+    <color name="very_light_brown">#d4b287</color>
+    <color name="lipstick">#e52a35</color>
+    <color name="dark_50">#232f38</color>
+    <color name="dark_87">#232f38</color>
+    <color name="slime_green">#8eca00</color>
+    <color name="dark_28">#232f38</color>
+    <color name="cool_grey">#90969b</color>
+    <color name="dusty_orange">#f27238</color>
+    <color name="dull_brown">#8d6c53</color>
 
-
+    <color name="line_separator">#eff4f9</color>
     <color name="text_color_black">#232f38</color>
     <color name="text_color_very_light_brown">#d4b287</color>
 </resources>

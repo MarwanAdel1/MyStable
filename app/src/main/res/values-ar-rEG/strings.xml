@@ -5,4 +5,19 @@
 
     <string name="no_items_yet">لا يوجـد عنصر حتى الآن</string>
     <string name="marketplace_is_not_available">السوق غير متاح بعد لهذا الموقع</string>
+    <string name="details">التفاصيل</string>
+    <string name="horse_information">معلومات الحصان</string>
+    <string name="horse_color">لون الحصان</string>
+    <string name="horse_sex_type">نوع جنس الحصان</string>
+    <string name="horse_gender">جنس الحصان</string>
+    <string name="date_of_birth">تاريخ الميلاد</string>
+    <string name="horse_breed">سلالة الحصان</string>
+    <string name="horse_strain">سلالة الحصان</string>
+    <string name="similar_items">منتجات متشابهة</string>
+
+    <string name="image_for_item">صورة للمنتج</string>
+    <string name="back_button">زر العودة</string>
+    <string name="this_ad_ends">هذا الاعلان سينتهى فى </string>
+
+    <string name="sold_out">بيعت</string>
 </resources>

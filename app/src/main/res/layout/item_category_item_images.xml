@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/images_recyclerview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clipToPadding="true"
+    android:orientation="horizontal"
+    android:overScrollMode="never"
+    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+    app:layout_constraintEnd_toEndOf="@id/item_name"
+    app:layout_constraintStart_toStartOf="@id/item_name"
+    app:layout_constraintTop_toBottomOf="@id/item_price"
+    tools:ignore="SpeakableTextPresentCheck"
+    tools:listitem="@layout/item_category_item_images_item" />

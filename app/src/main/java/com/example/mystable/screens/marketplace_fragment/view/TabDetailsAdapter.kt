@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mystable.R
-import com.example.mystable.databinding.ItemCategoryDetailsBinding
+import com.example.mystable.databinding.ItemCategoryItemsBinding
 import com.example.mystable.model.DataSource
 import com.example.mystable.pojo.CategoryItemData
 
@@ -25,7 +25,7 @@ class TabDetailsAdapter(
         viewType: Int
     ): MarketplaceCategoryDetailsViewHolder {
         val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
-        val view = ItemCategoryDetailsBinding.inflate(layoutInflater, parent, false)
+        val view = ItemCategoryItemsBinding.inflate(layoutInflater, parent, false)
 
         return MarketplaceCategoryDetailsViewHolder(view)
     }
@@ -53,6 +53,6 @@ class TabDetailsAdapter(
         return categoryDetailsItems.size
     }
 
-    inner class MarketplaceCategoryDetailsViewHolder(val binding: ItemCategoryDetailsBinding) :
+    inner class MarketplaceCategoryDetailsViewHolder(val binding: ItemCategoryItemsBinding) :
         RecyclerView.ViewHolder(binding.root)
 }

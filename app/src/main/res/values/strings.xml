@@ -4,5 +4,18 @@
 
     <string name="no_items_yet">No items, yet!</string>
     <string name="marketplace_is_not_available">Marketplace is not available yet to this location</string>
+    <string name="details">Details</string>
+    <string name="horse_information">Horse information</string>
+    <string name="horse_color">Horse Color</string>
+    <string name="horse_sex_type">Horse Sex Type</string>
+    <string name="horse_gender">Horse Gender</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="horse_breed">Horse Breed</string>
+    <string name="horse_strain">Horse Strain</string>
+    <string name="similar_items">Similar items</string>
+    <string name="image_for_item">Image For Item</string>
+    <string name="back_button">back button</string>
+    <string name="this_ad_ends">This ad ends in </string>
+    <string name="sold_out">Sold out</string>
 
 </resources>
