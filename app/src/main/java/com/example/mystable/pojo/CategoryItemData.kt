@@ -1,7 +1,7 @@
 package com.example.mystable.pojo
 
-data class CategoryDetailsItems(
-    val id: String,
+data class CategoryItemData(
+    val id: Int,
     val name: String,
     val imageUrl: String,
     val currencySymbol: String,

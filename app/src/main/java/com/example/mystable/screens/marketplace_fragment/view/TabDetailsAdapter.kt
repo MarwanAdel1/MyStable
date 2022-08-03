@@ -8,14 +8,14 @@ import com.bumptech.glide.Glide
 import com.example.mystable.R
 import com.example.mystable.databinding.ItemCategoryDetailsBinding
 import com.example.mystable.model.DataSource
-import com.example.mystable.pojo.CategoryDetailsItems
+import com.example.mystable.pojo.CategoryItemData
 
 class TabDetailsAdapter(
     private val myContext: Context,
-    private var categoryDetailsItems: List<CategoryDetailsItems>
+    private var categoryDetailsItems: List<CategoryItemData>
 ) : RecyclerView.Adapter<TabDetailsAdapter.MarketplaceCategoryDetailsViewHolder>() {
 
-    fun setTabDetails(categoryDetailsItems: List<CategoryDetailsItems>) {
+    fun setTabDetails(categoryDetailsItems: List<CategoryItemData>) {
         this.categoryDetailsItems = categoryDetailsItems
         notifyDataSetChanged()
     }

@@ -2,71 +2,165 @@ package com.example.mystable.model
 
 import com.example.mystable.pojo.Category
 import com.example.mystable.pojo.CategoryDetails
-import com.example.mystable.pojo.CategoryDetailsItems
+import com.example.mystable.pojo.CategoryItemData
 
 object DataSource {
-
     const val imageUrl =
         "https://media.istockphoto.com/photos/the-bay-horse-gallops-on-the-grass-picture-id1209008843?s=612x612"
+    private const val ownerImage =
+        "https://media.istockphoto.com/vectors/default-avatar-photo-placeholder-icon-grey-profile-picture-business-vector-id1327592506?s=612x612"
 
-    val tabs = listOf(
-        Category("1", "All"),
-        Category("2", "Horse Trading"),
-        Category("3", "Used Equipment"),
-        Category("4", "Stable for rent")
+    val categories = listOf(
+        Category(id = 1, name = "All"),
+        Category(id = 2, name = "Horse Trading"),
+        Category(id = 3, name = "Used Equipment"),
+        Category(id = 4, name = "Stable for rent")
     )
 
     //id 2 is excluded
-    val tabsDetails = listOf(
+    val CategoryDetails = listOf(
         CategoryDetails(
-            "5",
-            listOf(
-                CategoryDetailsItems("5", "ID5", "", "USD", 99.5),
+            id = 5,
+            categoryItemData = listOf(
+                CategoryItemData(
+                    id = 5,
+                    name = "Denvar",
+                    imageUrl = imageUrl,
+                    currencySymbol = "USD",
+                    price = 99.5
+                ),
             )
         ),
         CategoryDetails(
-            "4",
-            listOf(
-                CategoryDetailsItems("5", "ID4", "", "USD", 99.5),
+            id = 4,
+            categoryItemData = listOf(
+                CategoryItemData(
+                    id = 5,
+                    name = "Denvaro",
+                    imageUrl = imageUrl,
+                    currencySymbol = "USD",
+                    price = 99.5
+                ),
             )
         ),
         CategoryDetails(
-            "3",
-            listOf(
-                CategoryDetailsItems("5", "ID3", "", "USD", 99.5),
+            id = 3,
+            categoryItemData = listOf(
+                CategoryItemData(
+                    id = 5,
+                    name = "Denvary",
+                    imageUrl = imageUrl,
+                    currencySymbol = "USD",
+                    price = 99.5
+                ),
             )
         ),
         CategoryDetails(
-            "6",
-            listOf(
-                CategoryDetailsItems("5", "ID6", "", "USD", 99.5),
+            id = 6,
+            categoryItemData = listOf(
+                CategoryItemData(
+                    id = 5,
+                    name = "Denvar",
+                    imageUrl = imageUrl,
+                    currencySymbol = "USD",
+                    price = 99.5
+                ),
             )
         ),
         CategoryDetails(
-            "20",
-            listOf(
-                CategoryDetailsItems("5", "ID20", "", "USD", 99.5),
+            id = 20,
+            categoryItemData = listOf(
+                CategoryItemData(
+                    id = 5,
+                    name = "Denvar",
+                    imageUrl = imageUrl,
+                    currencySymbol = "USD",
+                    price = 99.5
+                ),
             )
         ),
         CategoryDetails(
-            "7",
-            listOf(
-                CategoryDetailsItems("1", "ID7", "", "USD", 99.5),
-                CategoryDetailsItems("2", "ID7", "", "USD", 99.5),
+            id = 7,
+            categoryItemData = listOf(
+                CategoryItemData(
+                    id = 1,
+                    name = "Denvar",
+                    imageUrl = imageUrl,
+                    currencySymbol = "USD",
+                    price = 99.5
+                ),
+                CategoryItemData(
+                    id = 2,
+                    name = "Denvar",
+                    imageUrl = imageUrl,
+                    currencySymbol = "USD",
+                    price = 99.5
+                ),
             )
         ),
         CategoryDetails(
-            "1",
-            listOf(
-                CategoryDetailsItems("5", "ID1", "", "USD", 99.5),
-                CategoryDetailsItems("1", "ID1", "", "USD", 99.5),
-                CategoryDetailsItems("2", "ID1", "", "USD", 99.5),
-                CategoryDetailsItems("3", "ID1", "", "USD", 99.5),
-                CategoryDetailsItems("4", "ID1", "", "USD", 99.5),
-                CategoryDetailsItems("6", "ID1", "", "USD", 99.5),
-                CategoryDetailsItems("7", "ID1", "", "USD", 99.5),
-                CategoryDetailsItems("8", "ID1", "", "USD", 99.5),
+            id = 1,
+            categoryItemData = listOf(
+                CategoryItemData(
+                    id = 5,
+                    name = "Denvar1",
+                    imageUrl = imageUrl,
+                    currencySymbol = "USD",
+                    price = 99.5
+                ),
+                CategoryItemData(
+                    id = 1,
+                    name = "Denvar2",
+                    imageUrl = imageUrl,
+                    currencySymbol = "USD",
+                    price = 99.5
+                ),
+                CategoryItemData(
+                    id = 2,
+                    name = "Denvar3",
+                    imageUrl = imageUrl,
+                    currencySymbol = "USD",
+                    price = 99.5
+                ),
+                CategoryItemData(
+                    id = 3,
+                    name = "Denvar4",
+                    imageUrl = imageUrl,
+                    currencySymbol = "USD",
+                    price = 99.5
+                ),
+                CategoryItemData(
+                    id = 4,
+                    name = "Denvar5",
+                    imageUrl = imageUrl,
+                    currencySymbol = "USD",
+                    price = 99.5
+                ),
+                CategoryItemData(
+                    id = 6,
+                    name = "Denvar6",
+                    imageUrl = imageUrl,
+                    currencySymbol = "USD",
+                    price = 99.5
+                ),
+                CategoryItemData(
+                    id = 7,
+                    name = "Denvar7",
+                    imageUrl = imageUrl,
+                    currencySymbol = "USD",
+                    price = 99.5
+                ),
+                CategoryItemData(
+                    id = 8,
+                    name = "Denvar8",
+                    imageUrl = imageUrl,
+                    currencySymbol = "USD",
+                    price = 99.5
+                ),
             ),
         ),
     )
+
+
+
 }

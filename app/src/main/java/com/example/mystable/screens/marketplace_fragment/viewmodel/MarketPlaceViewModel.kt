@@ -12,44 +12,46 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class MarketPlaceViewModel(private val marketplaceRepo: IMarketplaceRepo) : ViewModel() {
-    private val selectedCategoryMutableLiveData = MutableLiveData<String>()
-    val selectedCategoryLiveData: LiveData<String>
-        get() = selectedCategoryMutableLiveData
+    private val selectedCategorybyIdMutableLiveData = MutableLiveData<Int>()
+    val selectedCategoryByIdLiveData: LiveData<Int>
+        get() = selectedCategorybyIdMutableLiveData
 
     private val categoryMutableLiveData = MutableLiveData<List<Category>>()
     val categoryLiveData: LiveData<List<Category>>
         get() = categoryMutableLiveData
 
-    private val categoryDetailsMutableLiveData = MutableLiveData<CategoryDetails?>()
-    val categoryDetailsLiveData: LiveData<CategoryDetails?>
-        get() = categoryDetailsMutableLiveData
+    private val categoryItemsMutableLiveData = MutableLiveData<CategoryDetails?>()
+    val categoryItemsLiveData: LiveData<CategoryDetails?>
+        get() = categoryItemsMutableLiveData
 
     private var categoryDetailsJob: Job? = null
 
-    fun getCategory(flag: Boolean) {
+    fun getAllCategory(flag: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
             val tabs = marketplaceRepo.getCategories(flag)
 
             categoryMutableLiveData.postValue(tabs)
-            selectedCategoryMutableLiveData.postValue("0")
+            if(tabs.isNotEmpty()) {
+                selectedCategorybyIdMutableLiveData.postValue(tabs[0].id)
+            }
         }
     }
 
     fun refreshCategoryDetails() {
-        selectedCategoryMutableLiveData.value?.let { getCategoryDetails(it) }
+        selectedCategorybyIdMutableLiveData.value?.let { getCategoryDetails(it) }
     }
 
-    fun getCategoryDetails(id: String) {
+    fun getCategoryDetails(id: Int) {
         categoryDetailsJob?.cancel()
         setSelectedCategoryId(id)
         categoryDetailsJob = viewModelScope.launch(Dispatchers.IO) {
             val details = marketplaceRepo.getCategoryDetails(id)
 
-            categoryDetailsMutableLiveData.postValue(details)
+            categoryItemsMutableLiveData.postValue(details)
         }
     }
 
-    private fun setSelectedCategoryId(id: String) {
-        selectedCategoryMutableLiveData.postValue(id)
+    private fun setSelectedCategoryId(id: Int) {
+        selectedCategorybyIdMutableLiveData.postValue(id)
     }
 }

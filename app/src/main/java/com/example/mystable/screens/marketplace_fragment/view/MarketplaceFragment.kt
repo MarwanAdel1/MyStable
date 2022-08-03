@@ -44,7 +44,7 @@ class MarketplaceFragment : Fragment(), MarketplaceCategoriesCallBack {
         setupListener()
         initObservers()
 
-        viewModel.getCategory(false) // true for getting data - false for getting no data
+        viewModel.getAllCategory(false) // true for getting data - false for getting no data
 
     }
 
@@ -74,7 +74,7 @@ class MarketplaceFragment : Fragment(), MarketplaceCategoriesCallBack {
             binding.progressIndicator.visibility = View.VISIBLE
             binding.placeholderView.root.visibility = View.GONE
 
-            viewModel.getCategory(true)
+            viewModel.getAllCategory(true)
         }
 
         binding.swipeCategoryDetail.setOnRefreshListener {
@@ -91,7 +91,7 @@ class MarketplaceFragment : Fragment(), MarketplaceCategoriesCallBack {
         viewModel.categoryLiveData.observe(viewLifecycleOwner) {
             binding.progressIndicator.visibility = View.GONE
             updatePlaceholderLayoutParams(true)
-            if (it.isNullOrEmpty()) {
+            if (it.isEmpty()) {
                 binding.swipeAll.visibility = View.VISIBLE
                 binding.swipeAll.isEnabled = true
                 binding.swipeCategoryDetail.isEnabled = false
@@ -104,11 +104,11 @@ class MarketplaceFragment : Fragment(), MarketplaceCategoriesCallBack {
             }
         }
 
-        viewModel.categoryDetailsLiveData.observe(viewLifecycleOwner) {
+        viewModel.categoryItemsLiveData.observe(viewLifecycleOwner) {
             binding.progressIndicator.visibility = View.INVISIBLE
             updatePlaceholderLayoutParams(false)
             if (it != null) {
-                tabItemsAdapter.setTabDetails(it.categoryDetailsItems)
+                tabItemsAdapter.setTabDetails(it.categoryItemData)
                 binding.tabDetailsRecycler.visibility = View.VISIBLE
                 binding.placeholderView.root.visibility = View.GONE
             } else {
@@ -117,7 +117,7 @@ class MarketplaceFragment : Fragment(), MarketplaceCategoriesCallBack {
             }
         }
 
-        viewModel.selectedCategoryLiveData.observe(viewLifecycleOwner) {
+        viewModel.selectedCategoryByIdLiveData.observe(viewLifecycleOwner) {
             println("Selected ID: $it")
         }
     }

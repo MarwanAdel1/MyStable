@@ -5,5 +5,5 @@ import com.example.mystable.pojo.CategoryDetails
 
 interface IMarketplaceRepo {
     suspend fun getCategories(flag: Boolean): List<Category>
-    suspend fun getCategoryDetails(id: String): CategoryDetails?
+    suspend fun getCategoryDetails(id: Int): CategoryDetails?
 }

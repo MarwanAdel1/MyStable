@@ -1,6 +1,6 @@
 package com.example.mystable.pojo
 
 data class Category(
-    val id: String,
+    val id: Int,
     val name: String
 )

@@ -8,10 +8,10 @@ class MarketplaceRepo(private val marketplaceDataSource: MarketplaceDataSource) 
     IMarketplaceRepo {
 
     override suspend fun getCategories(flag: Boolean): List<Category> {
-        return marketplaceDataSource.getTabsInfo(flag)
+        return marketplaceDataSource.getCatInfo(flag)
     }
 
-    override suspend fun getCategoryDetails(id: String): CategoryDetails? {
-        return marketplaceDataSource.getTabDetails(id)
+    override suspend fun getCategoryDetails(id: Int): CategoryDetails? {
+        return marketplaceDataSource.getCatItems(id)
     }
 }
