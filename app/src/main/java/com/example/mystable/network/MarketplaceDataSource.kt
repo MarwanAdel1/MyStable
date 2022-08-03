@@ -3,6 +3,7 @@ package com.example.mystable.network
 import com.example.mystable.model.DataSource
 import com.example.mystable.pojo.Category
 import com.example.mystable.pojo.CategoryDetails
+import com.example.mystable.pojo.ItemDetails
 import kotlinx.coroutines.delay
 
 class MarketplaceDataSource {
@@ -17,6 +18,12 @@ class MarketplaceDataSource {
         return details
     }
 
+    suspend fun getItemData(categoryId: Int, itemId: Int): ItemDetails? {
+        val itemDetails = getItemDataById(categoryId, itemId)
+        delay(1500)
+        return itemDetails
+    }
+
     // simulate backend server respond with a one tab details depends on tab clicked (tab id) not all tabs
     private fun getCatItemsById(id: Int): CategoryDetails? {
         var details: CategoryDetails? = null
@@ -29,4 +36,18 @@ class MarketplaceDataSource {
         }
         return details
     }
+
+
+    private fun getItemDataById(categoryId: Int, itemId: Int): ItemDetails? {
+        var itemData: ItemDetails? = null
+
+        for (item in DataSource.categoryItemsDetails) {
+            if (item.categoryId == categoryId && item.itemId == itemId) {
+                itemData = item
+                break
+            }
+        }
+        return itemData
+    }
+
 }

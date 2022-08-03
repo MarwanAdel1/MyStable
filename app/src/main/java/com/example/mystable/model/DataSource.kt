@@ -1,8 +1,8 @@
 package com.example.mystable.model
 
-import com.example.mystable.pojo.Category
-import com.example.mystable.pojo.CategoryDetails
-import com.example.mystable.pojo.CategoryItemData
+import com.example.mystable.pojo.*
+import com.google.android.gms.maps.model.LatLng
+import java.util.*
 
 object DataSource {
     const val imageUrl =
@@ -135,32 +135,416 @@ object DataSource {
                     imageUrl = imageUrl,
                     currencySymbol = "USD",
                     price = 99.5
-                ),
-                CategoryItemData(
-                    id = 6,
-                    name = "Denvar6",
-                    imageUrl = imageUrl,
-                    currencySymbol = "USD",
-                    price = 99.5
-                ),
-                CategoryItemData(
-                    id = 7,
-                    name = "Denvar7",
-                    imageUrl = imageUrl,
-                    currencySymbol = "USD",
-                    price = 99.5
-                ),
-                CategoryItemData(
-                    id = 8,
-                    name = "Denvar8",
-                    imageUrl = imageUrl,
-                    currencySymbol = "USD",
-                    price = 99.5
-                ),
+                )
             ),
         ),
     )
 
+    val categoryItemsDetails = listOf(
+        ItemDetails(
+            categoryId = 5,
+            itemId = 5,
+            itemData = listOf(
+                ItemEssentialInfo(
+                    id = 5,
+                    name = "Denvar",
+                    currencySymbol = "USD",
+                    price = 99.5,
+                    endDate = getDate(2)
+                ),
+                ItemDescription(
+                    description = "Lorem Ipsum is simply dummy text of the print and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown ."
+                ),
+                ItemImages(
+                    imageUrl = listOf(
+                        imageUrl,
+                        imageUrl,
+                        imageUrl,
+                        imageUrl
+                    )
+                ),
+                ItemInfo(
+                    infoStatus = true,
+                    info = ItemInfoDetails(
+                        name = "Denvar",
+                        color = "Black",
+                        gender = "Gender",
+                        sexType = "Male",
+                        breed = "Horse Breed",
+                        strain = "Horse Strain",
+                        dob = getDate(-5)
+                    )
+                ),
+                ItemLocation(
+                    locationDescription = "Lorem Ipsum is simply dummy text of the print and typesetting industry.",
+                    location = LatLng(
+                        31.245928,
+                        29.965221
+                    )
+                ),
+                ItemOwner(
+                    soldStatus = true,
+                    owner = ItemOwnerInfo(
+                        ownerName = "Marwan Adel",
+                        ownerChat = "",
+                        ownerChatAvailability = false,
+                        ownerEmail = "marwan@gmail.com",
+                        ownerImage = ownerImage,
+                        ownerPhone = "01279444120"
+                    )
+                )
+            )
+        ),
+        ItemDetails(
+            categoryId = 4,
+            itemId = 5,
+            itemData = listOf(
+                ItemEssentialInfo(
+                    id = 5,
+                    name = "Denvar",
+                    currencySymbol = "USD",
+                    price = 99.5,
+                    endDate = getDate(2)
+                ),
+                ItemDescription(
+                    description = "Lorem Ipsum is simply dummy text of the print and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown ."
+                ),
+                ItemImages(
+                    imageUrl = listOf(
+                        imageUrl
+                    )
+                ),
+                ItemInfo(
+                    infoStatus = true,
+                    info = ItemInfoDetails(
+                        name = "Denvar",
+                        color = "Black",
+                        gender = "Gender",
+                        sexType = "Male",
+                        breed = "Horse Breed",
+                        strain = "Horse Strain",
+                        dob = getDate(-5)
+                    )
+                ),
+                ItemLocation(
+                    locationDescription = "Lorem Ipsum is simply dummy text of the print and typesetting industry.",
+                    location = LatLng(
+                        31.245928,
+                        29.965221
+                    )
+                ),
+                ItemOwner(
+                    soldStatus = false,
+                    owner = ItemOwnerInfo(
+                        ownerName = "Marwan Adel",
+                        ownerChat = "",
+                        ownerChatAvailability = false,
+                        ownerEmail = "marwan@gmail.com",
+                        ownerImage = ownerImage,
+                        ownerPhone = "01279444120"
+                    )
+                )
+            )
+        ),
+        ItemDetails(
+            categoryId = 3,
+            itemId = 5,
+            itemData = listOf(
+                ItemEssentialInfo(
+                    id = 5,
+                    name = "Denvar",
+                    currencySymbol = "USD",
+                    price = 99.5,
+                    endDate = getDate(2),
+                ),
+                ItemDescription(
+                    description = "Lorem Ipsum is simply dummy text of the print and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown ."
+                ),
+                ItemImages(
+                    imageUrl = listOf(
+                        imageUrl,
+                        imageUrl,
+                        imageUrl,
+                        imageUrl
+                    ),
+                ),
+                ItemInfo(
+                    infoStatus = true,
+                    info = ItemInfoDetails(
+                        name = "Denvar",
+                        color = "Black",
+                        gender = "Gender",
+                        sexType = "Male",
+                        breed = "Horse Breed",
+                        strain = "Horse Strain",
+                        dob = getDate(-5)
+                    )
+                ),
+                ItemLocation(
+                    locationDescription = "Lorem Ipsum is simply dummy text of the print and typesetting industry.",
+                    location = LatLng(
+                        31.245928,
+                        29.965221
+                    )
+                ),
+                ItemOwner(
+                    soldStatus = false,
+                    owner = ItemOwnerInfo(
+                        ownerName = "Marwan Adel",
+                        ownerChat = "",
+                        ownerChatAvailability = false,
+                        ownerEmail = "marwan@gmail.com",
+                        ownerImage = ownerImage,
+                        ownerPhone = "01279444120"
+                    )
+                )
+            )
+        ),
+        ItemDetails(
+            categoryId = 1,
+            itemId = 5,
+            itemData = listOf(
+                ItemEssentialInfo(
+                    id = 5,
+                    name = "Denvar1",
+                    currencySymbol = "USD",
+                    price = 99.5,
+                    endDate = getDate(2)
+                ),
+                ItemDescription(
+                    description = "Lorem Ipsum is simply dummy text of the print and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown ."
+                ),
+                ItemImages(
+                    imageUrl = listOf(
+                        imageUrl
+                    ),
+                ),
+                ItemInfo(
+                    infoStatus = false,
+                    info = null
+                ),
+                ItemLocation(
+                    locationDescription = "Lorem Ipsum is simply dummy text of the print and typesetting industry.",
+                    location = LatLng(
+                        31.245928,
+                        29.965221
+                    )
+                ),
+                ItemOwner(
+                    soldStatus = true,
+                    owner = ItemOwnerInfo(
+                        ownerName = "Marwan Adel",
+                        ownerChat = "",
+                        ownerChatAvailability = false,
+                        ownerEmail = "marwan@gmail.com",
+                        ownerImage = ownerImage,
+                        ownerPhone = "01279444120"
+                    )
+                )
+            )
+        ),
+        ItemDetails(
+            categoryId = 1,
+            itemId = 1,
+            itemData = listOf(
+                ItemEssentialInfo(
+                    id = 1,
+                    name = "Denvar2",
+                    currencySymbol = "USD",
+                    price = 99.5,
+                    endDate = getDate(2)
+                ),
+                ItemDescription(
+                    description = "Lorem Ipsum is simply dummy text of the print and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown ."
+                ),
+                ItemImages(
+                    imageUrl = listOf(
+                        imageUrl
+                    ),
+                ),
+                ItemInfo(
+                    infoStatus = true,
+                    info = ItemInfoDetails(
+                        name = "Denvar2",
+                        color = "Black",
+                        gender = "Gender",
+                        sexType = "Male",
+                        breed = "Horse Breed",
+                        strain = "Horse Strain",
+                        dob = getDate(-5)
+                    )
+                ),
+                ItemLocation(
+                    locationDescription = "Lorem Ipsum is simply dummy text of the print and typesetting industry.",
+                    location = LatLng(
+                        31.245928,
+                        29.965221
+                    )
+                ),
+                ItemOwner(
+                    soldStatus = false,
+                    owner = ItemOwnerInfo(
+                        ownerName = "Marwan Adel",
+                        ownerChat = "",
+                        ownerChatAvailability = false,
+                        ownerEmail = "marwan@gmail.com",
+                        ownerImage = ownerImage,
+                        ownerPhone = "01279444120"
+                    )
+                )
+            )
+        ),
+        ItemDetails(
+            categoryId = 1,
+            itemId = 2,
+            itemData = listOf(
+                ItemEssentialInfo(
+                    id = 2,
+                    name = "Denvar3",
+                    currencySymbol = "USD",
+                    price = 99.5,
+                    endDate = getDate(2),
+                ),
+                ItemDescription(
+                    description = "Lorem Ipsum is simply dummy text of the print and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown ."
+                ),
+                ItemImages(
+                    imageUrl = listOf(
+                        imageUrl
+                    ),
+                ),
+                ItemInfo(
+                    infoStatus = false,
+                    info = null
+                ),
+                ItemLocation(
+                    locationDescription = "Lorem Ipsum is simply dummy text of the print and typesetting industry.",
+                    location = LatLng(
+                        31.245928,
+                        29.965221
+                    )
+                ),
+                ItemOwner(
+                    soldStatus = false,
+                    owner = ItemOwnerInfo(
+                        ownerName = "Marwan Adel",
+                        ownerChat = "",
+                        ownerChatAvailability = false,
+                        ownerEmail = "marwan@gmail.com",
+                        ownerImage = ownerImage,
+                        ownerPhone = "01279444120"
+                    )
+                )
+            )
+        ),
+        ItemDetails(
+            categoryId = 1,
+            itemId = 3,
+            itemData = listOf(
+                ItemEssentialInfo(
+                    id = 3,
+                    name = "Denvar4",
+                    currencySymbol = "USD",
+                    price = 99.5,
+                    endDate = getDate(2)
+                ),
+                ItemDescription(
+                    description = "Lorem Ipsum is simply dummy text of the print and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown ."
+                ),
+                ItemImages(
+                    imageUrl = listOf(
+                        imageUrl
+                    ),
+                ),
+                ItemInfo(
+                    infoStatus = true,
+                    info = ItemInfoDetails(
+                        name = "Denvar4",
+                        color = "Black",
+                        gender = "Gender",
+                        sexType = "Male",
+                        breed = "Horse Breed",
+                        strain = "Horse Strain",
+                        dob = getDate(-5)
+                    )
+                ),
+                ItemLocation(
+                    locationDescription = "Lorem Ipsum is simply dummy text of the print and typesetting industry.",
+                    location = LatLng(
+                        31.245928,
+                        29.965221
+                    )
+                ),
+                ItemOwner(
+                    soldStatus = false,
+                    owner = ItemOwnerInfo(
+                        ownerName = "Marwan Adel",
+                        ownerChat = "",
+                        ownerChatAvailability = false,
+                        ownerEmail = "marwan@gmail.com",
+                        ownerImage = ownerImage,
+                        ownerPhone = "01279444120"
+                    )
+                )
+            )
+        ),
+        ItemDetails(
+            categoryId = 1,
+            itemId = 4,
+            itemData = listOf(
+                ItemEssentialInfo(
+                    id = 4,
+                    name = "Denvar5",
+                    currencySymbol = "USD",
+                    price = 99.5,
+                    endDate = getDate(2)
+                ),
+                ItemDescription(
+                    description = "Lorem Ipsum is simply dummy text of the print and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown ."
+                ),
+                ItemImages(
+                    imageUrl = listOf(
+                        imageUrl
+                    ),
+                ),
+                ItemInfo(
+                    infoStatus = true,
+                    info = ItemInfoDetails(
+                        name = "Denvar5",
+                        color = "Black",
+                        gender = "Gender",
+                        sexType = "Male",
+                        breed = "Horse Breed",
+                        strain = "Horse Strain",
+                        dob = getDate(-5)
+                    )
+                ),
+                ItemLocation(
+                    locationDescription = "Lorem Ipsum is simply dummy text of the print and typesetting industry.",
+                    location = LatLng(
+                        31.245928,
+                        29.965221
+                    )
+                ),
+                ItemOwner(
+                    soldStatus = false,
+                    owner = ItemOwnerInfo(
+                        ownerName = "Marwan Adel",
+                        ownerChat = "",
+                        ownerChatAvailability = false,
+                        ownerEmail = "marwan@gmail.com",
+                        ownerImage = ownerImage,
+                        ownerPhone = "01279444120"
+                    )
+                )
+            )
+        )
+    )
 
 
+    private fun getDate(monthsNumbers: Int): Date {
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.MONTH, (calendar.get(Calendar.MONTH) + monthsNumbers))
+        return calendar.time
+    }
 }
