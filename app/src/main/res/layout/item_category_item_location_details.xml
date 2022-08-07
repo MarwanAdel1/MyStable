@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="20dp">
 
     <TextView
         android:id="@+id/location_tx"
@@ -11,9 +12,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/sfpro_semibold"
-        android:text="Location on map"
+        android:text="@string/location_on_map"
         android:textColor="@color/text_color_black"
-        android:textSize="15sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,23 +25,22 @@
         android:layout_marginTop="10dp"
         android:fontFamily="@font/sfpro_regular"
         android:textColor="@color/dark_87"
-        android:textSize="15sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/location_tx"
         tools:text="Lorem Ipsum is simply dummy text of the print and typesetting industry." />
 
-    <include xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/map"
-        layout="@layout/fragment_marketplace_category_item_maps"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/shape_rounded_corner_image_view"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/location_description_tx" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

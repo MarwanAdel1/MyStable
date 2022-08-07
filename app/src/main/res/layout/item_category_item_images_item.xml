@@ -8,10 +8,10 @@
     android:background="@drawable/shape_rounded_corner_image_view">
 
     <ImageView
-        android:contentDescription="@string/image_for_item"
         android:id="@+id/item_images_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/shape_rounded_corner_image_view" />
+        android:background="@drawable/shape_rounded_corner_image_view"
+        android:contentDescription="@string/image_for_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

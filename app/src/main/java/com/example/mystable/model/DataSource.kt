@@ -20,11 +20,11 @@ object DataSource {
     //id 2 is excluded
     val CategoryDetails = listOf(
         CategoryDetails(
-            id = 5,
+            categoryId = 5,
             categoryItemData = listOf(
                 CategoryItemData(
                     id = 5,
-                    name = "Denvar",
+                    name = "Denver",
                     imageUrl = imageUrl,
                     currencySymbol = "USD",
                     price = 99.5
@@ -32,11 +32,11 @@ object DataSource {
             )
         ),
         CategoryDetails(
-            id = 4,
+            categoryId = 4,
             categoryItemData = listOf(
                 CategoryItemData(
                     id = 5,
-                    name = "Denvaro",
+                    name = "Denver",
                     imageUrl = imageUrl,
                     currencySymbol = "USD",
                     price = 99.5
@@ -44,11 +44,11 @@ object DataSource {
             )
         ),
         CategoryDetails(
-            id = 3,
+            categoryId = 3,
             categoryItemData = listOf(
                 CategoryItemData(
                     id = 5,
-                    name = "Denvary",
+                    name = "Denver",
                     imageUrl = imageUrl,
                     currencySymbol = "USD",
                     price = 99.5
@@ -56,11 +56,11 @@ object DataSource {
             )
         ),
         CategoryDetails(
-            id = 6,
+            categoryId = 6,
             categoryItemData = listOf(
                 CategoryItemData(
                     id = 5,
-                    name = "Denvar",
+                    name = "Denver",
                     imageUrl = imageUrl,
                     currencySymbol = "USD",
                     price = 99.5
@@ -68,11 +68,11 @@ object DataSource {
             )
         ),
         CategoryDetails(
-            id = 20,
+            categoryId = 20,
             categoryItemData = listOf(
                 CategoryItemData(
                     id = 5,
-                    name = "Denvar",
+                    name = "Denver",
                     imageUrl = imageUrl,
                     currencySymbol = "USD",
                     price = 99.5
@@ -80,18 +80,18 @@ object DataSource {
             )
         ),
         CategoryDetails(
-            id = 7,
+            categoryId = 7,
             categoryItemData = listOf(
                 CategoryItemData(
                     id = 1,
-                    name = "Denvar",
+                    name = "Denver",
                     imageUrl = imageUrl,
                     currencySymbol = "USD",
                     price = 99.5
                 ),
                 CategoryItemData(
                     id = 2,
-                    name = "Denvar",
+                    name = "Denver",
                     imageUrl = imageUrl,
                     currencySymbol = "USD",
                     price = 99.5
@@ -99,39 +99,39 @@ object DataSource {
             )
         ),
         CategoryDetails(
-            id = 1,
+            categoryId = 1,
             categoryItemData = listOf(
                 CategoryItemData(
                     id = 5,
-                    name = "Denvar1",
+                    name = "Denver1",
                     imageUrl = imageUrl,
                     currencySymbol = "USD",
                     price = 99.5
                 ),
                 CategoryItemData(
                     id = 1,
-                    name = "Denvar2",
+                    name = "Denver2",
                     imageUrl = imageUrl,
                     currencySymbol = "USD",
                     price = 99.5
                 ),
                 CategoryItemData(
                     id = 2,
-                    name = "Denvar3",
+                    name = "Denver3",
                     imageUrl = imageUrl,
                     currencySymbol = "USD",
                     price = 99.5
                 ),
                 CategoryItemData(
                     id = 3,
-                    name = "Denvar4",
+                    name = "Denver4",
                     imageUrl = imageUrl,
                     currencySymbol = "USD",
                     price = 99.5
                 ),
                 CategoryItemData(
                     id = 4,
-                    name = "Denvar5",
+                    name = "Denver5",
                     imageUrl = imageUrl,
                     currencySymbol = "USD",
                     price = 99.5
@@ -147,7 +147,7 @@ object DataSource {
             itemData = listOf(
                 ItemEssentialInfo(
                     id = 5,
-                    name = "Denvar",
+                    name = "Denver",
                     currencySymbol = "USD",
                     price = 99.5,
                     endDate = getDate(2)
@@ -165,14 +165,14 @@ object DataSource {
                 ),
                 ItemInfo(
                     infoStatus = true,
-                    info = ItemInfoDetails(
-                        name = "Denvar",
-                        color = "Black",
-                        gender = "Gender",
-                        sexType = "Male",
-                        breed = "Horse Breed",
-                        strain = "Horse Strain",
-                        dob = getDate(-5)
+                    info = mapOf<String, Any>(
+                        Pair("Horse name", "Denver"),
+                        Pair("Horse color", "Black"),
+                        Pair("Horse gender", "Gender"),
+                        Pair("Horse sex type", "Male"),
+                        Pair("Date of birth", getDate(-5)),
+                        Pair("Horse Breed", "Horse Breed"),
+                        Pair("Horse Strain", "Horse Strain")
                     )
                 ),
                 ItemLocation(
@@ -186,6 +186,7 @@ object DataSource {
                     soldStatus = true,
                     owner = ItemOwnerInfo(
                         ownerName = "Marwan Adel",
+                        ownerDesc = "Owner",
                         ownerChat = "",
                         ownerChatAvailability = false,
                         ownerEmail = "marwan@gmail.com",
@@ -201,7 +202,7 @@ object DataSource {
             itemData = listOf(
                 ItemEssentialInfo(
                     id = 5,
-                    name = "Denvar",
+                    name = "Denver",
                     currencySymbol = "USD",
                     price = 99.5,
                     endDate = getDate(2)
@@ -216,14 +217,14 @@ object DataSource {
                 ),
                 ItemInfo(
                     infoStatus = true,
-                    info = ItemInfoDetails(
-                        name = "Denvar",
-                        color = "Black",
-                        gender = "Gender",
-                        sexType = "Male",
-                        breed = "Horse Breed",
-                        strain = "Horse Strain",
-                        dob = getDate(-5)
+                    info = mapOf<String, Any>(
+                        Pair("Horse name", "Denver"),
+                        Pair("Horse color", "Black"),
+                        Pair("Horse gender", "Gender"),
+                        Pair("Horse sex type", "Male"),
+                        Pair("Date of birth", getDate(-5)),
+                        Pair("Horse Breed", "Horse Breed"),
+                        Pair("Horse Strain", "Horse Strain")
                     )
                 ),
                 ItemLocation(
@@ -237,6 +238,7 @@ object DataSource {
                     soldStatus = false,
                     owner = ItemOwnerInfo(
                         ownerName = "Marwan Adel",
+                        ownerDesc = "Owner",
                         ownerChat = "",
                         ownerChatAvailability = false,
                         ownerEmail = "marwan@gmail.com",
@@ -252,7 +254,7 @@ object DataSource {
             itemData = listOf(
                 ItemEssentialInfo(
                     id = 5,
-                    name = "Denvar",
+                    name = "Denver",
                     currencySymbol = "USD",
                     price = 99.5,
                     endDate = getDate(2),
@@ -270,14 +272,14 @@ object DataSource {
                 ),
                 ItemInfo(
                     infoStatus = true,
-                    info = ItemInfoDetails(
-                        name = "Denvar",
-                        color = "Black",
-                        gender = "Gender",
-                        sexType = "Male",
-                        breed = "Horse Breed",
-                        strain = "Horse Strain",
-                        dob = getDate(-5)
+                    info = mapOf<String, Any>(
+                        Pair("Horse name", "Denver"),
+                        Pair("Horse color", "Black"),
+                        Pair("Horse gender", "Gender"),
+                        Pair("Horse sex type", "Male"),
+                        Pair("Date of birth", getDate(-5)),
+                        Pair("Horse Breed", "Horse Breed"),
+                        Pair("Horse Strain", "Horse Strain")
                     )
                 ),
                 ItemLocation(
@@ -291,6 +293,7 @@ object DataSource {
                     soldStatus = false,
                     owner = ItemOwnerInfo(
                         ownerName = "Marwan Adel",
+                        ownerDesc = "Owner",
                         ownerChat = "",
                         ownerChatAvailability = false,
                         ownerEmail = "marwan@gmail.com",
@@ -306,7 +309,7 @@ object DataSource {
             itemData = listOf(
                 ItemEssentialInfo(
                     id = 5,
-                    name = "Denvar1",
+                    name = "Denver1",
                     currencySymbol = "USD",
                     price = 99.5,
                     endDate = getDate(2)
@@ -316,12 +319,10 @@ object DataSource {
                 ),
                 ItemImages(
                     imageUrl = listOf(
+                        imageUrl,
+                        imageUrl,
                         imageUrl
                     ),
-                ),
-                ItemInfo(
-                    infoStatus = false,
-                    info = null
                 ),
                 ItemLocation(
                     locationDescription = "Lorem Ipsum is simply dummy text of the print and typesetting industry.",
@@ -334,6 +335,7 @@ object DataSource {
                     soldStatus = true,
                     owner = ItemOwnerInfo(
                         ownerName = "Marwan Adel",
+                        ownerDesc = "Owner",
                         ownerChat = "",
                         ownerChatAvailability = false,
                         ownerEmail = "marwan@gmail.com",
@@ -349,7 +351,7 @@ object DataSource {
             itemData = listOf(
                 ItemEssentialInfo(
                     id = 1,
-                    name = "Denvar2",
+                    name = "Denver2",
                     currencySymbol = "USD",
                     price = 99.5,
                     endDate = getDate(2)
@@ -364,14 +366,14 @@ object DataSource {
                 ),
                 ItemInfo(
                     infoStatus = true,
-                    info = ItemInfoDetails(
-                        name = "Denvar2",
-                        color = "Black",
-                        gender = "Gender",
-                        sexType = "Male",
-                        breed = "Horse Breed",
-                        strain = "Horse Strain",
-                        dob = getDate(-5)
+                    info = mapOf<String, Any>(
+                        Pair("Horse name", "Denver2"),
+                        Pair("Horse color", "Black"),
+                        Pair("Horse gender", "Gender"),
+                        Pair("Horse sex type", "Male"),
+                        Pair("Date of birth", getDate(-5)),
+                        Pair("Horse Breed", "Horse Breed"),
+                        Pair("Horse Strain", "Horse Strain")
                     )
                 ),
                 ItemLocation(
@@ -385,6 +387,7 @@ object DataSource {
                     soldStatus = false,
                     owner = ItemOwnerInfo(
                         ownerName = "Marwan Adel",
+                        ownerDesc = "Owner",
                         ownerChat = "",
                         ownerChatAvailability = false,
                         ownerEmail = "marwan@gmail.com",
@@ -400,7 +403,7 @@ object DataSource {
             itemData = listOf(
                 ItemEssentialInfo(
                     id = 2,
-                    name = "Denvar3",
+                    name = "Denver3",
                     currencySymbol = "USD",
                     price = 99.5,
                     endDate = getDate(2),
@@ -428,6 +431,7 @@ object DataSource {
                     soldStatus = false,
                     owner = ItemOwnerInfo(
                         ownerName = "Marwan Adel",
+                        ownerDesc = "Owner",
                         ownerChat = "",
                         ownerChatAvailability = false,
                         ownerEmail = "marwan@gmail.com",
@@ -443,7 +447,7 @@ object DataSource {
             itemData = listOf(
                 ItemEssentialInfo(
                     id = 3,
-                    name = "Denvar4",
+                    name = "Denver4",
                     currencySymbol = "USD",
                     price = 99.5,
                     endDate = getDate(2)
@@ -458,14 +462,14 @@ object DataSource {
                 ),
                 ItemInfo(
                     infoStatus = true,
-                    info = ItemInfoDetails(
-                        name = "Denvar4",
-                        color = "Black",
-                        gender = "Gender",
-                        sexType = "Male",
-                        breed = "Horse Breed",
-                        strain = "Horse Strain",
-                        dob = getDate(-5)
+                    info = mapOf<String, Any>(
+                        Pair("Horse name", "Denver4"),
+                        Pair("Horse color", "Black"),
+                        Pair("Horse gender", "Gender"),
+                        Pair("Horse sex type", "Male"),
+                        Pair("Date of birth", getDate(-5)),
+                        Pair("Horse Breed", "Horse Breed"),
+                        Pair("Horse Strain", "Horse Strain")
                     )
                 ),
                 ItemLocation(
@@ -479,6 +483,7 @@ object DataSource {
                     soldStatus = false,
                     owner = ItemOwnerInfo(
                         ownerName = "Marwan Adel",
+                        ownerDesc = "Owner",
                         ownerChat = "",
                         ownerChatAvailability = false,
                         ownerEmail = "marwan@gmail.com",
@@ -494,7 +499,7 @@ object DataSource {
             itemData = listOf(
                 ItemEssentialInfo(
                     id = 4,
-                    name = "Denvar5",
+                    name = "Denver5",
                     currencySymbol = "USD",
                     price = 99.5,
                     endDate = getDate(2)
@@ -509,14 +514,14 @@ object DataSource {
                 ),
                 ItemInfo(
                     infoStatus = true,
-                    info = ItemInfoDetails(
-                        name = "Denvar5",
-                        color = "Black",
-                        gender = "Gender",
-                        sexType = "Male",
-                        breed = "Horse Breed",
-                        strain = "Horse Strain",
-                        dob = getDate(-5)
+                    info = mapOf<String, Any>(
+                        Pair("Horse name", "Denver5"),
+                        Pair("Horse color", "Black"),
+                        Pair("Horse gender", "Gender"),
+                        Pair("Horse sex type", "Male"),
+                        Pair("Date of birth", getDate(-5)),
+                        Pair("Horse Breed", "Horse Breed"),
+                        Pair("Horse Strain", "Horse Strain")
                     )
                 ),
                 ItemLocation(
@@ -530,6 +535,7 @@ object DataSource {
                     soldStatus = false,
                     owner = ItemOwnerInfo(
                         ownerName = "Marwan Adel",
+                        ownerDesc = "Owner",
                         ownerChat = "",
                         ownerChatAvailability = false,
                         ownerEmail = "marwan@gmail.com",
@@ -544,7 +550,10 @@ object DataSource {
 
     private fun getDate(monthsNumbers: Int): Date {
         val calendar = Calendar.getInstance()
-        calendar.set(Calendar.MONTH, (calendar.get(Calendar.MONTH) + monthsNumbers))
+        calendar.set(
+            Calendar.MONTH,
+            (calendar.get(Calendar.MONTH) + monthsNumbers)
+        )
         return calendar.time
     }
 }

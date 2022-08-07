@@ -8,14 +8,15 @@ import com.bumptech.glide.Glide
 import com.example.mystable.R
 import com.example.mystable.databinding.ItemCategoryItemsBinding
 import com.example.mystable.model.DataSource
-import com.example.mystable.pojo.CategoryItemData
+import com.example.mystable.pojo.CategoryDetails
 
 class TabDetailsAdapter(
     private val myContext: Context,
-    private var categoryDetailsItems: List<CategoryItemData>
+    private var categoryDetailsItems: CategoryDetails,
+    private val communicator: MarketplaceCategoryItemsCallback
 ) : RecyclerView.Adapter<TabDetailsAdapter.MarketplaceCategoryDetailsViewHolder>() {
 
-    fun setTabDetails(categoryDetailsItems: List<CategoryItemData>) {
+    fun setTabDetails(categoryDetailsItems: CategoryDetails) {
         this.categoryDetailsItems = categoryDetailsItems
         notifyDataSetChanged()
     }
@@ -32,9 +33,9 @@ class TabDetailsAdapter(
 
     override fun onBindViewHolder(holder: MarketplaceCategoryDetailsViewHolder, position: Int) {
         holder.binding.apply {
-            itemName.text = categoryDetailsItems[position].name
+            itemName.text = categoryDetailsItems.categoryItemData[position].name
             itemPrice.text =
-                "${categoryDetailsItems[position].currencySymbol} ${categoryDetailsItems[position].price}"
+                "${categoryDetailsItems.categoryItemData[position].currencySymbol} ${categoryDetailsItems.categoryItemData[position].price}"
             Glide.with(myContext)
                 .load(DataSource.imageUrl)
                 .placeholder(R.drawable.ic_launcher_background)
@@ -44,13 +45,17 @@ class TabDetailsAdapter(
             itemImage.clipToOutline = true
 
             itemView.setOnClickListener {
-
+                communicator.getCategoryItemDetails(
+                    categoryDetailsItems.categoryId,
+                    categoryDetailsItems.categoryItemData[position].id,
+                    it
+                )
             }
         }
     }
 
     override fun getItemCount(): Int {
-        return categoryDetailsItems.size
+        return categoryDetailsItems.categoryItemData.size
     }
 
     inner class MarketplaceCategoryDetailsViewHolder(val binding: ItemCategoryItemsBinding) :

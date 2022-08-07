@@ -17,5 +17,9 @@
     <string name="back_button">back button</string>
     <string name="this_ad_ends">This ad ends in </string>
     <string name="sold_out">Sold out</string>
+    <string name="add_new_item">add new item</string>
+    <string name="search_for_item">search for item</string>
+    <string name="location_on_map">Location on map</string>
+    <string name="view_more">View more</string>
 
 </resources>

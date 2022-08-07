@@ -1,5 +1,6 @@
 package com.example.mystable.pojo
 
 data class ItemSimilarItem(
-    val info: ItemEssentialInfo
+    val categoryId: Int,
+    val items: List<CategoryItemData>
 ) : ICategoryItemsData

@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="20dp">
 
     <TextView
         android:id="@+id/item_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="22dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/sfpro_bold"
         android:textAlignment="viewStart"
         android:textColor="@color/text_color_black"
-        android:textSize="25sp"
+        android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Denvar" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
@@ -34,8 +32,7 @@
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/item_name"
-        app:layout_constraintTop_toBottomOf="@id/item_name"
-        tools:text="USD 230" />
+        app:layout_constraintTop_toBottomOf="@id/item_name" />
 
     <TextView
         android:id="@+id/item_end_time"
@@ -50,8 +47,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@id/item_price"
-        app:layout_constraintTop_toTopOf="@id/item_price"
-        tools:text="this add ends 10 October" />
+        app:layout_constraintTop_toTopOf="@id/item_price" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

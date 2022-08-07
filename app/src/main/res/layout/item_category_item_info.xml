@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="20dp">
 
     <TextView
         android:id="@+id/horse_info_tx"
@@ -19,11 +20,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/horse_info_recycler_view"
+        android:id="@+id/item_info_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:clipToPadding="false"
         android:orientation="vertical"
+        android:paddingVertical="10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/horse_info_tx"
         tools:listitem="@layout/item_category_item_info_items_view" />

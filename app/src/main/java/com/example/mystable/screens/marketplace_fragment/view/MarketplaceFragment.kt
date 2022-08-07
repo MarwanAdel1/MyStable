@@ -9,16 +9,19 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
+import androidx.navigation.findNavController
 import com.example.mystable.R
 import com.example.mystable.databinding.FragmentMarketplaceBinding
 import com.example.mystable.model.MarketplaceRepo
 import com.example.mystable.network.MarketplaceDataSource
 import com.example.mystable.pojo.Category
+import com.example.mystable.pojo.CategoryDetails
 import com.example.mystable.screens.marketplace_fragment.viewmodel.MarketPlaceViewModel
 import com.example.mystable.screens.marketplace_fragment.viewmodel.MarketPlaceViewModelFactory
 
 
-class MarketplaceFragment : Fragment(), MarketplaceCategoriesCallBack {
+class MarketplaceFragment : Fragment(), MarketplaceCategoriesCallBack,
+    MarketplaceCategoryItemsCallback {
     private lateinit var binding: FragmentMarketplaceBinding
 
     private lateinit var viewModel: MarketPlaceViewModel
@@ -26,6 +29,20 @@ class MarketplaceFragment : Fragment(), MarketplaceCategoriesCallBack {
 
     private lateinit var tabsAdapter: TabsAdapter
     private lateinit var tabItemsAdapter: TabDetailsAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        viewModelFactory = MarketPlaceViewModelFactory(
+            MarketplaceRepo(MarketplaceDataSource())
+        )
+
+        viewModel =
+            ViewModelProvider(this, viewModelFactory)[MarketPlaceViewModel::
+            class.java]
+
+        viewModel.getAllCategory(false) // true for getting data - false for getting no data
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,9 +60,6 @@ class MarketplaceFragment : Fragment(), MarketplaceCategoriesCallBack {
         init()
         setupListener()
         initObservers()
-
-        viewModel.getAllCategory(false) // true for getting data - false for getting no data
-
     }
 
     private fun init() {
@@ -53,33 +67,44 @@ class MarketplaceFragment : Fragment(), MarketplaceCategoriesCallBack {
 
         tabsAdapter = TabsAdapter(requireContext(), emptyList(), this)
         binding.tabsRecycler.adapter = tabsAdapter
-        tabItemsAdapter = TabDetailsAdapter(requireContext(), emptyList())
+        tabItemsAdapter =
+            TabDetailsAdapter(requireContext(), CategoryDetails(-1, emptyList()), this)
         binding.tabDetailsRecycler.adapter = tabItemsAdapter
 
-        viewModelFactory = MarketPlaceViewModelFactory(
-            MarketplaceRepo(MarketplaceDataSource())
-        )
+        disableSwipe()
 
-        viewModel =
-            ViewModelProvider(this, viewModelFactory)[MarketPlaceViewModel::
-            class.java]
-
-        binding.swipeCategoryDetail.isEnabled = false
         binding.progressIndicator.visibility = View.VISIBLE
+    }
+
+    private fun disableSwipe() {
+        binding.swipeCategoryDetail.isEnabled = false
+        binding.swipeAll.isEnabled = false
+    }
+
+    private fun hideAllViews() {
+        binding.placeholderView.root.visibility = View.GONE
+        binding.tabsRecycler.visibility = View.GONE
+        binding.tabDetailsRecycler.visibility = View.GONE
     }
 
     private fun setupListener() {
         binding.swipeAll.setOnRefreshListener {
             binding.swipeAll.isRefreshing = false
+            binding.swipeAll.isEnabled = false
+
             binding.progressIndicator.visibility = View.VISIBLE
-            binding.placeholderView.root.visibility = View.GONE
+
+            hideAllViews()
 
             viewModel.getAllCategory(true)
         }
 
         binding.swipeCategoryDetail.setOnRefreshListener {
             binding.swipeCategoryDetail.isRefreshing = false
+            binding.swipeCategoryDetail.isEnabled = false
+
             binding.progressIndicator.visibility = View.VISIBLE
+
             binding.tabDetailsRecycler.visibility = View.GONE
             binding.placeholderView.root.visibility = View.GONE
 
@@ -89,29 +114,40 @@ class MarketplaceFragment : Fragment(), MarketplaceCategoriesCallBack {
 
     private fun initObservers() {
         viewModel.categoryLiveData.observe(viewLifecycleOwner) {
-            binding.progressIndicator.visibility = View.GONE
             updatePlaceholderLayoutParams(true)
             if (it.isEmpty()) {
-                binding.swipeAll.visibility = View.VISIBLE
+                binding.progressIndicator.visibility = View.GONE
                 binding.swipeAll.isEnabled = true
                 binding.swipeCategoryDetail.isEnabled = false
+
+                binding.tabsRecycler.visibility = View.GONE
+                binding.tabDetailsRecycler.visibility = View.GONE
+
                 binding.placeholderView.root.visibility = View.VISIBLE
             } else {
-                tabsAdapter.setTabsInfo(it)
                 binding.swipeAll.isEnabled = false
-                binding.swipeCategoryDetail.isEnabled = true
+
+                tabsAdapter.setTabsInfo(it)
+
+                binding.tabsRecycler.visibility = View.VISIBLE
+                binding.tabDetailsRecycler.visibility = View.GONE
+
                 binding.placeholderView.root.visibility = View.GONE
             }
         }
 
         viewModel.categoryItemsLiveData.observe(viewLifecycleOwner) {
             binding.progressIndicator.visibility = View.INVISIBLE
+            binding.tabsRecycler.visibility = View.VISIBLE
+            binding.swipeCategoryDetail.isEnabled = true
             updatePlaceholderLayoutParams(false)
             if (it != null) {
-                tabItemsAdapter.setTabDetails(it.categoryItemData)
+                tabItemsAdapter.setTabDetails(it)
                 binding.tabDetailsRecycler.visibility = View.VISIBLE
+
                 binding.placeholderView.root.visibility = View.GONE
             } else {
+
                 binding.tabDetailsRecycler.visibility = View.GONE
                 binding.placeholderView.root.visibility = View.VISIBLE
             }
@@ -120,14 +156,6 @@ class MarketplaceFragment : Fragment(), MarketplaceCategoriesCallBack {
         viewModel.selectedCategoryByIdLiveData.observe(viewLifecycleOwner) {
             println("Selected ID: $it")
         }
-    }
-
-    override fun showDataForClickedItem(tab: Category) {
-        binding.tabDetailsRecycler.visibility = View.INVISIBLE
-        binding.placeholderView.root.visibility = View.INVISIBLE
-        binding.progressIndicator.visibility = View.VISIBLE
-//        tabItemsAdapter.setTabDetails(emptyList())
-        viewModel.getCategoryDetails(tab.id)
     }
 
     private fun updatePlaceholderLayoutParams(isFull: Boolean) {
@@ -150,5 +178,23 @@ class MarketplaceFragment : Fragment(), MarketplaceCategoriesCallBack {
                 )
             )
         }
+    }
+
+    override fun showDataForClickedItem(tab: Category) {
+        binding.tabDetailsRecycler.visibility = View.GONE
+        binding.placeholderView.root.visibility = View.GONE
+        binding.progressIndicator.visibility = View.VISIBLE
+//        tabItemsAdapter.setTabDetails(emptyList())
+        viewModel.getCategoryDetails(tab.id)
+    }
+
+    override fun getCategoryItemDetails(categoryId: Int, itemId: Int, view: View) {
+        view.findNavController()
+            .navigate(
+                MarketplaceFragmentDirections.actionMarketplaceFragmentToMarketplaceItemDetailsFragment(
+                    categoryId = categoryId,
+                    itemId = itemId
+                )
+            )
     }
 }

@@ -12,9 +12,9 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class MarketPlaceViewModel(private val marketplaceRepo: IMarketplaceRepo) : ViewModel() {
-    private val selectedCategorybyIdMutableLiveData = MutableLiveData<Int>()
+    private val selectedCategoryByIdMutableLiveData = MutableLiveData<Int>()
     val selectedCategoryByIdLiveData: LiveData<Int>
-        get() = selectedCategorybyIdMutableLiveData
+        get() = selectedCategoryByIdMutableLiveData
 
     private val categoryMutableLiveData = MutableLiveData<List<Category>>()
     val categoryLiveData: LiveData<List<Category>>
@@ -31,14 +31,14 @@ class MarketPlaceViewModel(private val marketplaceRepo: IMarketplaceRepo) : View
             val tabs = marketplaceRepo.getCategories(flag)
 
             categoryMutableLiveData.postValue(tabs)
-            if(tabs.isNotEmpty()) {
-                selectedCategorybyIdMutableLiveData.postValue(tabs[0].id)
+            if (tabs.isNotEmpty()) {
+                selectedCategoryByIdMutableLiveData.postValue(tabs[0].id)
             }
         }
     }
 
     fun refreshCategoryDetails() {
-        selectedCategorybyIdMutableLiveData.value?.let { getCategoryDetails(it) }
+        selectedCategoryByIdMutableLiveData.value?.let { getCategoryDetails(it) }
     }
 
     fun getCategoryDetails(id: Int) {
@@ -52,6 +52,6 @@ class MarketPlaceViewModel(private val marketplaceRepo: IMarketplaceRepo) : View
     }
 
     private fun setSelectedCategoryId(id: Int) {
-        selectedCategorybyIdMutableLiveData.postValue(id)
+        selectedCategoryByIdMutableLiveData.postValue(id)
     }
 }

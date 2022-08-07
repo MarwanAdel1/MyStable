@@ -45,11 +45,13 @@
         android:layout_height="30dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/shape_rounded_corner_plus_button"
+        android:contentDescription="@string/add_new_item"
         android:foreground="@drawable/ripple_plus_button"
         android:src="@drawable/icon_plus"
         app:layout_constraintBottom_toBottomOf="@id/country_bt"
         app:layout_constraintEnd_toStartOf="@id/search_imagebutton"
-        app:layout_constraintTop_toTopOf="@id/country_bt" />
+        app:layout_constraintTop_toTopOf="@id/country_bt"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <ImageButton
         android:id="@+id/search_imagebutton"
@@ -58,11 +60,13 @@
         android:layout_marginVertical="18dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/shape_rounded_corner_image_btn_white_view"
+        android:contentDescription="@string/search_for_item"
         android:foreground="@drawable/ripple_rounded_corner_view_unselected"
         android:src="@drawable/icon_search"
         app:layout_constraintBottom_toBottomOf="@id/country_bt"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/country_bt" />
+        app:layout_constraintTop_toTopOf="@id/country_bt"
+        tools:ignore="TouchTargetSizeCheck" />
 
 
     <View

@@ -20,4 +20,8 @@
     <string name="this_ad_ends">هذا الاعلان سينتهى فى </string>
 
     <string name="sold_out">بيعت</string>
+    <string name="add_new_item">اضافة عنصر جديد</string>
+    <string name="search_for_item">search for item</string>
+    <string name="location_on_map">المكان على الخريطة</string>
+    <string name="view_more">المزيد</string>
 </resources>
