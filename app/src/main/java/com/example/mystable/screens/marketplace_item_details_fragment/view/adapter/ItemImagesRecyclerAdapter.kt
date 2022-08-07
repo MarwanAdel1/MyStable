@@ -1,4 +1,4 @@
-package com.example.mystable.screens.marketplace_item_details_fragment.view
+package com.example.mystable.screens.marketplace_item_details_fragment.view.adapter
 
 import android.content.Context
 import android.view.LayoutInflater

@@ -1,4 +1,4 @@
-package com.example.mystable.screens.marketplace_fragment.view
+package com.example.mystable.screens.marketplace_fragment.view.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,12 +9,13 @@ import com.example.mystable.R
 import com.example.mystable.databinding.ItemCategoryItemsBinding
 import com.example.mystable.model.DataSource
 import com.example.mystable.pojo.CategoryDetails
+import com.example.mystable.screens.marketplace_fragment.view.MarketplaceCategoryItemsCallback
 
-class TabDetailsAdapter(
+class CategoryTabItemsAdapter(
     private val myContext: Context,
     private var categoryDetailsItems: CategoryDetails,
     private val communicator: MarketplaceCategoryItemsCallback
-) : RecyclerView.Adapter<TabDetailsAdapter.MarketplaceCategoryDetailsViewHolder>() {
+) : RecyclerView.Adapter<CategoryTabItemsAdapter.MarketplaceCategoryDetailsViewHolder>() {
 
     fun setTabDetails(categoryDetailsItems: CategoryDetails) {
         this.categoryDetailsItems = categoryDetailsItems

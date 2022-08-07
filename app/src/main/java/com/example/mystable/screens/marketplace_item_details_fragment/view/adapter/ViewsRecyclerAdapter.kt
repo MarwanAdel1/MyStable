@@ -1,4 +1,4 @@
-package com.example.mystable.screens.marketplace_item_details_fragment.view
+package com.example.mystable.screens.marketplace_item_details_fragment.view.adapter
 
 
 import android.content.Context
@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.example.mystable.R
 import com.example.mystable.databinding.*
 import com.example.mystable.pojo.*
+import com.example.mystable.screens.marketplace_item_details_fragment.view.MarketplaceItemDetailsSimilarItemCallback
 import java.text.SimpleDateFormat
 import java.util.*
 

@@ -12,9 +12,9 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class MarketPlaceViewModel(private val marketplaceRepo: IMarketplaceRepo) : ViewModel() {
-    private val selectedCategoryByIdMutableLiveData = MutableLiveData<Int>()
-    val selectedCategoryByIdLiveData: LiveData<Int>
-        get() = selectedCategoryByIdMutableLiveData
+    private val selectedCategoryByRowIndexMutableLiveData = MutableLiveData<Int>()
+    val selectedCategoryByRowIndexLiveData: LiveData<Int>
+        get() = selectedCategoryByRowIndexMutableLiveData
 
     private val categoryMutableLiveData = MutableLiveData<List<Category>>()
     val categoryLiveData: LiveData<List<Category>>
@@ -32,26 +32,36 @@ class MarketPlaceViewModel(private val marketplaceRepo: IMarketplaceRepo) : View
 
             categoryMutableLiveData.postValue(tabs)
             if (tabs.isNotEmpty()) {
-                selectedCategoryByIdMutableLiveData.postValue(tabs[0].id)
+                selectedCategoryByRowIndexMutableLiveData.postValue(0)
             }
         }
     }
 
     fun refreshCategoryDetails() {
-        selectedCategoryByIdMutableLiveData.value?.let { getCategoryDetails(it) }
+        selectedCategoryByRowIndexMutableLiveData.value?.let {
+            getCategoryDetails(
+                getCategoryId(it),
+                it
+            )
+        }
     }
 
-    fun getCategoryDetails(id: Int) {
+    private fun getCategoryId(rowIndex: Int): Int {
+        return categoryMutableLiveData.value?.get(rowIndex)!!.id
+    }
+
+    fun getCategoryDetails(id: Int, rowIndex: Int) {
         categoryDetailsJob?.cancel()
         setSelectedCategoryId(id)
         categoryDetailsJob = viewModelScope.launch(Dispatchers.IO) {
             val details = marketplaceRepo.getCategoryDetails(id)
 
             categoryItemsMutableLiveData.postValue(details)
+            selectedCategoryByRowIndexMutableLiveData.postValue(rowIndex)
         }
     }
 
     private fun setSelectedCategoryId(id: Int) {
-        selectedCategoryByIdMutableLiveData.postValue(id)
+        selectedCategoryByRowIndexMutableLiveData.postValue(id)
     }
 }

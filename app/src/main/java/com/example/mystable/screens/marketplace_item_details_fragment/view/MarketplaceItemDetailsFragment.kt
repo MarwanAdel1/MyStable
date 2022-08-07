@@ -7,13 +7,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.example.mystable.R
 import com.example.mystable.databinding.FragmentMarketplaceItemDetailsBinding
 import com.example.mystable.model.MarketplaceRepo
 import com.example.mystable.network.MarketplaceDataSource
 import com.example.mystable.pojo.CategoryItemData
+import com.example.mystable.screens.marketplace_item_details_fragment.view.adapter.ViewsRecyclerAdapter
 import com.example.mystable.screens.marketplace_item_details_fragment.viewmodel.MarketplaceItemDetailsViewModel
 import com.example.mystable.screens.marketplace_item_details_fragment.viewmodel.MarketplaceItemDetailsViewModelFactory
+
 
 class MarketplaceItemDetailsFragment : Fragment(), MarketplaceItemDetailsSimilarItemCallback {
     private lateinit var binding: FragmentMarketplaceItemDetailsBinding
@@ -50,8 +53,22 @@ class MarketplaceItemDetailsFragment : Fragment(), MarketplaceItemDetailsSimilar
         val viewsAdapter = ViewsRecyclerAdapter(mutableListOf(), requireContext(), this)
         binding.viewsRecyclerview.adapter = viewsAdapter
 
+        binding.viewsRecyclerview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (!recyclerView.canScrollVertically(-1)) {
+                    binding.viewMoreBt.visibility = View.VISIBLE
+                } else {
+                    binding.viewMoreBt.visibility = View.GONE
+                }
+            }
+        })
+
         viewModel.itemDataLiveData.observe(viewLifecycleOwner) {
-            it?.let { data -> viewsAdapter.setViews(data.itemData) }
+            it?.let { data ->
+                viewsAdapter.setViews(data.itemData)
+                binding.progressIndicator.visibility = View.GONE
+            }
         }
 
         viewModel.similarItemsLiveData.observe(viewLifecycleOwner) {

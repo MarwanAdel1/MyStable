@@ -16,6 +16,8 @@ import com.example.mystable.model.MarketplaceRepo
 import com.example.mystable.network.MarketplaceDataSource
 import com.example.mystable.pojo.Category
 import com.example.mystable.pojo.CategoryDetails
+import com.example.mystable.screens.marketplace_fragment.view.adapter.CategoryTabAdapter
+import com.example.mystable.screens.marketplace_fragment.view.adapter.CategoryTabItemsAdapter
 import com.example.mystable.screens.marketplace_fragment.viewmodel.MarketPlaceViewModel
 import com.example.mystable.screens.marketplace_fragment.viewmodel.MarketPlaceViewModelFactory
 
@@ -27,8 +29,8 @@ class MarketplaceFragment : Fragment(), MarketplaceCategoriesCallBack,
     private lateinit var viewModel: MarketPlaceViewModel
     private lateinit var viewModelFactory: MarketPlaceViewModelFactory
 
-    private lateinit var tabsAdapter: TabsAdapter
-    private lateinit var tabItemsAdapter: TabDetailsAdapter
+    private lateinit var categoryTabAdapter: CategoryTabAdapter
+    private lateinit var tabItemsAdapter: CategoryTabItemsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,10 +67,10 @@ class MarketplaceFragment : Fragment(), MarketplaceCategoriesCallBack,
     private fun init() {
         binding.countryBt.text = "Egypt"  // temp
 
-        tabsAdapter = TabsAdapter(requireContext(), emptyList(), this)
-        binding.tabsRecycler.adapter = tabsAdapter
+        categoryTabAdapter = CategoryTabAdapter(requireContext(), emptyList(), this)
+        binding.tabsRecycler.adapter = categoryTabAdapter
         tabItemsAdapter =
-            TabDetailsAdapter(requireContext(), CategoryDetails(-1, emptyList()), this)
+            CategoryTabItemsAdapter(requireContext(), CategoryDetails(-1, emptyList()), this)
         binding.tabDetailsRecycler.adapter = tabItemsAdapter
 
         disableSwipe()
@@ -91,9 +93,7 @@ class MarketplaceFragment : Fragment(), MarketplaceCategoriesCallBack,
         binding.swipeAll.setOnRefreshListener {
             binding.swipeAll.isRefreshing = false
             binding.swipeAll.isEnabled = false
-
             binding.progressIndicator.visibility = View.VISIBLE
-
             hideAllViews()
 
             viewModel.getAllCategory(true)
@@ -102,9 +102,7 @@ class MarketplaceFragment : Fragment(), MarketplaceCategoriesCallBack,
         binding.swipeCategoryDetail.setOnRefreshListener {
             binding.swipeCategoryDetail.isRefreshing = false
             binding.swipeCategoryDetail.isEnabled = false
-
             binding.progressIndicator.visibility = View.VISIBLE
-
             binding.tabDetailsRecycler.visibility = View.GONE
             binding.placeholderView.root.visibility = View.GONE
 
@@ -119,19 +117,15 @@ class MarketplaceFragment : Fragment(), MarketplaceCategoriesCallBack,
                 binding.progressIndicator.visibility = View.GONE
                 binding.swipeAll.isEnabled = true
                 binding.swipeCategoryDetail.isEnabled = false
-
                 binding.tabsRecycler.visibility = View.GONE
                 binding.tabDetailsRecycler.visibility = View.GONE
-
                 binding.placeholderView.root.visibility = View.VISIBLE
             } else {
                 binding.swipeAll.isEnabled = false
 
-                tabsAdapter.setTabsInfo(it)
-
+                categoryTabAdapter.setCategoryTabsInfo(it)
                 binding.tabsRecycler.visibility = View.VISIBLE
                 binding.tabDetailsRecycler.visibility = View.GONE
-
                 binding.placeholderView.root.visibility = View.GONE
             }
         }
@@ -153,8 +147,8 @@ class MarketplaceFragment : Fragment(), MarketplaceCategoriesCallBack,
             }
         }
 
-        viewModel.selectedCategoryByIdLiveData.observe(viewLifecycleOwner) {
-            println("Selected ID: $it")
+        viewModel.selectedCategoryByRowIndexLiveData.observe(viewLifecycleOwner) {
+            categoryTabAdapter.setSelectedCategoryTab(it)
         }
     }
 
@@ -180,12 +174,12 @@ class MarketplaceFragment : Fragment(), MarketplaceCategoriesCallBack,
         }
     }
 
-    override fun showDataForClickedItem(tab: Category) {
+    override fun showDataForClickedItem(tab: Category, rowIndex: Int) {
         binding.tabDetailsRecycler.visibility = View.GONE
         binding.placeholderView.root.visibility = View.GONE
         binding.progressIndicator.visibility = View.VISIBLE
 //        tabItemsAdapter.setTabDetails(emptyList())
-        viewModel.getCategoryDetails(tab.id)
+        viewModel.getCategoryDetails(tab.id, rowIndex)
     }
 
     override fun getCategoryItemDetails(categoryId: Int, itemId: Int, view: View) {

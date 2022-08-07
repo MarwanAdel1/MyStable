@@ -1,4 +1,4 @@
-package com.example.mystable.screens.marketplace_item_details_fragment.view
+package com.example.mystable.screens.marketplace_item_details_fragment.view.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import com.example.mystable.R
 import com.example.mystable.databinding.ItemCategoryItemsBinding
 import com.example.mystable.model.DataSource
 import com.example.mystable.pojo.ItemSimilarItem
+import com.example.mystable.screens.marketplace_item_details_fragment.view.MarketplaceItemDetailsSimilarItemCallback
 
 class SimilarItemAdapter(
     private val myContext: Context,

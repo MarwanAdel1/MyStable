@@ -31,16 +31,23 @@
         app:layout_constraintTop_toBottomOf="@id/location_tx"
         tools:text="Lorem Ipsum is simply dummy text of the print and typesetting industry." />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/shape_rounded_corner_image_view"
+        app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/location_description_tx" />
+        app:layout_constraintTop_toBottomOf="@id/location_description_tx">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/shape_rounded_corner_image_view" />
+
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

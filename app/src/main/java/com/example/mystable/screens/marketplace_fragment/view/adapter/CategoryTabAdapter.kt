@@ -1,4 +1,4 @@
-package com.example.mystable.screens.marketplace_fragment.view
+package com.example.mystable.screens.marketplace_fragment.view.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,17 +8,25 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mystable.R
 import com.example.mystable.databinding.ItemCategoryBinding
 import com.example.mystable.pojo.Category
+import com.example.mystable.screens.marketplace_fragment.view.MarketplaceCategoriesCallBack
 
-class TabsAdapter(
+class CategoryTabAdapter(
     private var myContext: Context,
     private var tabs: List<Category>,
     private var communicator: MarketplaceCategoriesCallBack
-) : RecyclerView.Adapter<TabsAdapter.MarketplaceCategoryViewHolder>() {
+) : RecyclerView.Adapter<CategoryTabAdapter.MarketplaceCategoryViewHolder>() {
     private var rowIndex = 0
 
-    fun setTabsInfo(tabs: List<Category>) {
+    fun setCategoryTabsInfo(tabs: List<Category>) {
         this.tabs = tabs
         notifyDataSetChanged()
+    }
+
+    fun setSelectedCategoryTab(rowIndex: Int) {
+//        println(rowIndex)
+//        notifyItemChanged(rowIndex)
+//        this.rowIndex = rowIndex
+//        notifyItemChanged(rowIndex)
     }
 
     override fun onCreateViewHolder(
@@ -36,7 +44,7 @@ class TabsAdapter(
             tabName.text = tabs[position].name
 
             if (rowIndex == position) {
-                communicator.showDataForClickedItem(tabs[position])
+                communicator.showDataForClickedItem(tabs[rowIndex], rowIndex)
                 tabsView.setBackgroundResource(R.drawable.shape_rounded_corner_tabs_selected)
                 tabName.setTextColor(ContextCompat.getColor(myContext, R.color.white))
             } else {

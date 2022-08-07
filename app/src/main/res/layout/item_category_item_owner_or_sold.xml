@@ -95,6 +95,7 @@
         android:layout_marginVertical="20dp"
         android:background="@drawable/shape_rounded_button"
         android:fontFamily="@font/sfpro_bold"
+        android:foreground="@drawable/ripple_rounded_corner_view_unselected"
         android:text="@string/sold_out"
         android:textAlignment="center"
         android:textAllCaps="false"
