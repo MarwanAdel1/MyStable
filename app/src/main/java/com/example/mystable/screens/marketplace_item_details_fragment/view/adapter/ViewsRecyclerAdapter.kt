@@ -5,12 +5,18 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mystable.R
 import com.example.mystable.databinding.*
 import com.example.mystable.pojo.*
 import com.example.mystable.screens.marketplace_item_details_fragment.view.MarketplaceItemDetailsSimilarItemCallback
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -18,6 +24,7 @@ import java.util.*
 class ViewsRecyclerAdapter(
     private var itemTypes: MutableList<ICategoryItemsData>,
     private val myContext: Context,
+    private val myActivity: FragmentActivity,
     private val similarItemsCallback: MarketplaceItemDetailsSimilarItemCallback
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -193,7 +200,24 @@ class ViewsRecyclerAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(location: ItemLocation) {
             binding.locationDescriptionTx.text = location.locationDescription
-            // goz2 l map --- hb3t l parameter lel map fragment !!
+
+            initializeMap(location.location)
+        }
+
+        private fun initializeMap(itemLocation: LatLng) {
+            val callback = OnMapReadyCallback { googleMap ->
+                googleMap.addMarker(
+                    MarkerOptions().position(itemLocation).title("Item Location")
+                )
+                googleMap.moveCamera(CameraUpdateFactory.newLatLng(itemLocation))
+            }
+
+            val mapFragment = SupportMapFragment.newInstance()
+            myActivity.supportFragmentManager
+                .beginTransaction()
+                .add(R.id.map, mapFragment)
+                .commit()
+            mapFragment.getMapAsync(callback)
         }
     }
 

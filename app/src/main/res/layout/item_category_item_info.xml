@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingHorizontal="20dp">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/horse_info_tx"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="30dp"
         android:fontFamily="@font/sfpro_semibold"
         android:maxLines="1"
@@ -22,9 +22,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/item_info_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="10dp"
+        android:clipToPadding="false"
         android:orientation="vertical"
+        android:paddingHorizontal="20dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/horse_info_tx"
         tools:listitem="@layout/item_category_item_info_items_view" />

@@ -35,6 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginTop="10dp"
+        android:elevation="0dp"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,8 +46,7 @@
             android:id="@+id/map"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@drawable/shape_rounded_corner_image_view" />
+            android:layout_height="100dp" />
 
     </androidx.cardview.widget.CardView>
 

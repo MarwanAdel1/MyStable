@@ -4,7 +4,7 @@
     android:id="@+id/item_view"
     android:layout_width="160dp"
     android:layout_height="148dp"
-    android:layout_marginVertical="10dp"
+    android:layout_marginBottom="10dp"
     android:layout_marginEnd="10dp">
 
     <FrameLayout
@@ -16,7 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/shape_rounded_corner_image_btn_pink_view"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/image_for_item" />
 
         <View
             android:layout_width="match_parent"
@@ -30,7 +31,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:fontFamily="@font/sfpro_bold"
+        android:ellipsize="end"
+        android:fontFamily="@font/sfpro_semibold"
         android:maxLines="1"
         android:textAlignment="viewStart"
         android:textColor="@color/white"
@@ -45,7 +47,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="10dp"
-        android:fontFamily="@font/sfpro_bold"
+        android:ellipsize="end"
+        android:fontFamily="@font/sfpro_regular"
         android:maxLines="1"
         android:textAlignment="viewStart"
         android:textColor="@color/text_color_very_light_brown"

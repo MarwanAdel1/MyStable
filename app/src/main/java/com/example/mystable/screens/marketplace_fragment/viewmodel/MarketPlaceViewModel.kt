@@ -12,6 +12,10 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class MarketPlaceViewModel(private val marketplaceRepo: IMarketplaceRepo) : ViewModel() {
+    init {
+        getAllCategory(false) // true for getting data - false for getting no data
+    }
+
     private val selectedCategoryByRowIndexMutableLiveData = MutableLiveData<Int>()
     val selectedCategoryByRowIndexLiveData: LiveData<Int>
         get() = selectedCategoryByRowIndexMutableLiveData
@@ -32,7 +36,7 @@ class MarketPlaceViewModel(private val marketplaceRepo: IMarketplaceRepo) : View
 
             categoryMutableLiveData.postValue(tabs)
             if (tabs.isNotEmpty()) {
-                selectedCategoryByRowIndexMutableLiveData.postValue(0)
+                setSelectedCategoryIndex(0)
             }
         }
     }
@@ -40,28 +44,25 @@ class MarketPlaceViewModel(private val marketplaceRepo: IMarketplaceRepo) : View
     fun refreshCategoryDetails() {
         selectedCategoryByRowIndexMutableLiveData.value?.let {
             getCategoryDetails(
-                getCategoryId(it),
-                it
+                getCategoryIdByRowIndex(it)
             )
         }
     }
 
-    private fun getCategoryId(rowIndex: Int): Int {
-        return categoryMutableLiveData.value?.get(rowIndex)!!.id
-    }
-
-    fun getCategoryDetails(id: Int, rowIndex: Int) {
+    fun getCategoryDetails(id: Int) {
         categoryDetailsJob?.cancel()
-        setSelectedCategoryId(id)
         categoryDetailsJob = viewModelScope.launch(Dispatchers.IO) {
-            val details = marketplaceRepo.getCategoryDetails(id)
 
+            val details = marketplaceRepo.getCategoryDetails(id)
             categoryItemsMutableLiveData.postValue(details)
-            selectedCategoryByRowIndexMutableLiveData.postValue(rowIndex)
         }
     }
 
-    private fun setSelectedCategoryId(id: Int) {
-        selectedCategoryByRowIndexMutableLiveData.postValue(id)
+    fun setSelectedCategoryIndex(rwoIndex: Int) {
+        selectedCategoryByRowIndexMutableLiveData.postValue(rwoIndex)
+    }
+
+    private fun getCategoryIdByRowIndex(rowIndex: Int): Int {
+        return categoryMutableLiveData.value?.get(rowIndex)!!.id
     }
 }

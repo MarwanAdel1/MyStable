@@ -1,5 +1,6 @@
 package com.example.mystable.screens.marketplace_fragment.view.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -15,18 +16,22 @@ class CategoryTabAdapter(
     private var tabs: List<Category>,
     private var communicator: MarketplaceCategoriesCallBack
 ) : RecyclerView.Adapter<CategoryTabAdapter.MarketplaceCategoryViewHolder>() {
-    private var rowIndex = 0
+    private var rowIndex = -1
 
     fun setCategoryTabsInfo(tabs: List<Category>) {
         this.tabs = tabs
         notifyDataSetChanged()
+        if (this.tabs.isNotEmpty()) {
+            communicator.showDataForClickedItem(this.tabs[0])
+        }
     }
 
     fun setSelectedCategoryTab(rowIndex: Int) {
-//        println(rowIndex)
-//        notifyItemChanged(rowIndex)
-//        this.rowIndex = rowIndex
-//        notifyItemChanged(rowIndex)
+        if (this.rowIndex != rowIndex) {
+            notifyItemChanged(this.rowIndex)
+            this.rowIndex = rowIndex
+            notifyItemChanged(this.rowIndex)
+        }
     }
 
     override fun onCreateViewHolder(
@@ -39,12 +44,14 @@ class CategoryTabAdapter(
         return MarketplaceCategoryViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: MarketplaceCategoryViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: MarketplaceCategoryViewHolder,
+        @SuppressLint("RecyclerView") position: Int
+    ) {
         holder.binding.apply {
             tabName.text = tabs[position].name
 
             if (rowIndex == position) {
-                communicator.showDataForClickedItem(tabs[rowIndex], rowIndex)
                 tabsView.setBackgroundResource(R.drawable.shape_rounded_corner_tabs_selected)
                 tabName.setTextColor(ContextCompat.getColor(myContext, R.color.white))
             } else {
@@ -54,9 +61,8 @@ class CategoryTabAdapter(
 
             tabsView.setOnClickListener {
                 if (rowIndex != position) {
-                    notifyItemChanged(rowIndex)
-                    rowIndex = position
-                    notifyItemChanged(rowIndex)
+                    communicator.setCategorySelected(position)
+                    communicator.showDataForClickedItem(tabs[position])
                 }
             }
         }

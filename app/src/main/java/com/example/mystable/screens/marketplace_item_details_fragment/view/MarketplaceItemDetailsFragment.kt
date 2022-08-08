@@ -27,6 +27,8 @@ class MarketplaceItemDetailsFragment : Fragment(), MarketplaceItemDetailsSimilar
     private var itemId: Int = -1
     private var categoryId: Int = -1
 
+    private lateinit var viewsAdapter: ViewsRecyclerAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,10 +39,7 @@ class MarketplaceItemDetailsFragment : Fragment(), MarketplaceItemDetailsSimilar
         itemId = MarketplaceItemDetailsFragmentArgs.fromBundle(requireArguments()).itemId
         categoryId = MarketplaceItemDetailsFragmentArgs.fromBundle(requireArguments()).categoryId
 
-        viewModelFactory =
-            MarketplaceItemDetailsViewModelFactory(MarketplaceRepo(MarketplaceDataSource()))
-        viewModel =
-            ViewModelProvider(this, viewModelFactory)[MarketplaceItemDetailsViewModel::class.java]
+        init()
 
         viewModel.getItemDetails(categoryId, itemId)
         viewModel.getSimilarItems(categoryId)
@@ -48,36 +47,25 @@ class MarketplaceItemDetailsFragment : Fragment(), MarketplaceItemDetailsSimilar
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val viewsAdapter = ViewsRecyclerAdapter(mutableListOf(), requireContext(), this)
+    private fun init() {
+        val viewsAdapter =
+            ViewsRecyclerAdapter(mutableListOf(), requireContext(), requireActivity(), this)
         binding.viewsRecyclerview.adapter = viewsAdapter
 
-        binding.viewsRecyclerview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                if (!recyclerView.canScrollVertically(-1)) {
-                    binding.viewMoreBt.visibility = View.VISIBLE
-                } else {
-                    binding.viewMoreBt.visibility = View.GONE
-                }
-            }
-        })
+        viewModelFactory =
+            MarketplaceItemDetailsViewModelFactory(MarketplaceRepo(MarketplaceDataSource()))
+        viewModel =
+            ViewModelProvider(this, viewModelFactory)[MarketplaceItemDetailsViewModel::class.java]
+    }
 
-        viewModel.itemDataLiveData.observe(viewLifecycleOwner) {
-            it?.let { data ->
-                viewsAdapter.setViews(data.itemData)
-                binding.progressIndicator.visibility = View.GONE
-            }
-        }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        viewModel.similarItemsLiveData.observe(viewLifecycleOwner) {
-            it?.let { items ->
-                viewsAdapter.setSimilarItems(items)
-                binding.viewMoreBt.visibility = View.VISIBLE
-            }
-        }
+        setupListeners()
+        setupObservers()
+    }
 
+    private fun setupListeners() {
         binding.viewMoreBt.setOnClickListener {
             binding.viewsRecyclerview.layoutManager?.smoothScrollToPosition(
                 binding.viewsRecyclerview,
@@ -90,6 +78,33 @@ class MarketplaceItemDetailsFragment : Fragment(), MarketplaceItemDetailsSimilar
         binding.backBt.setOnClickListener {
             it.findNavController()
                 .popBackStack(R.id.marketplaceFragment, false)
+        }
+
+        binding.viewsRecyclerview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (!recyclerView.canScrollVertically(-1)) {
+                    binding.viewMoreBt.visibility = View.VISIBLE
+                } else {
+                    binding.viewMoreBt.visibility = View.GONE
+                }
+            }
+        })
+    }
+
+    private fun setupObservers() {
+        viewModel.itemDataLiveData.observe(viewLifecycleOwner) {
+            it?.let { data ->
+                viewsAdapter.setViews(data.itemData)
+                binding.progressIndicator.visibility = View.GONE
+            }
+        }
+
+        viewModel.similarItemsLiveData.observe(viewLifecycleOwner) {
+            it?.let { items ->
+                viewsAdapter.setSimilarItems(items)
+                binding.viewMoreBt.visibility = View.VISIBLE
+            }
         }
     }
 

@@ -16,10 +16,11 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:backgroundTint="@android:color/transparent"
+        android:fontFamily="@font/sfpro_regular"
         android:paddingHorizontal="10dp"
         android:paddingVertical="6dp"
         android:textAlignment="viewStart"
-        android:textColor="@color/text_color_black"
+        android:textColor="@color/dark"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

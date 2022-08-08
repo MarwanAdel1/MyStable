@@ -32,20 +32,6 @@ class MarketplaceFragment : Fragment(), MarketplaceCategoriesCallBack,
     private lateinit var categoryTabAdapter: CategoryTabAdapter
     private lateinit var tabItemsAdapter: CategoryTabItemsAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        viewModelFactory = MarketPlaceViewModelFactory(
-            MarketplaceRepo(MarketplaceDataSource())
-        )
-
-        viewModel =
-            ViewModelProvider(this, viewModelFactory)[MarketPlaceViewModel::
-            class.java]
-
-        viewModel.getAllCategory(false) // true for getting data - false for getting no data
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -65,49 +51,58 @@ class MarketplaceFragment : Fragment(), MarketplaceCategoriesCallBack,
     }
 
     private fun init() {
-        binding.countryBt.text = "Egypt"  // temp
-
         categoryTabAdapter = CategoryTabAdapter(requireContext(), emptyList(), this)
-        binding.tabsRecycler.adapter = categoryTabAdapter
         tabItemsAdapter =
             CategoryTabItemsAdapter(requireContext(), CategoryDetails(-1, emptyList()), this)
+        binding.tabsRecycler.adapter = categoryTabAdapter
         binding.tabDetailsRecycler.adapter = tabItemsAdapter
 
-        disableSwipe()
+        initViews()
 
-        binding.progressIndicator.visibility = View.VISIBLE
+        viewModelFactory = MarketPlaceViewModelFactory(
+            MarketplaceRepo(MarketplaceDataSource())
+        )
+        viewModel =
+            ViewModelProvider(this, viewModelFactory)[MarketPlaceViewModel::
+            class.java]
     }
 
-    private fun disableSwipe() {
+    private fun initViews() {
+        binding.countryBt.text = "Egypt"  // temp
+
+        binding.progressIndicator.visibility = View.VISIBLE
+
         binding.swipeCategoryDetail.isEnabled = false
         binding.swipeAll.isEnabled = false
     }
 
-    private fun hideAllViews() {
+    private fun setupListener() {
+        binding.swipeAll.setOnRefreshListener {
+            setupViewsForRefreshAll()
+            viewModel.getAllCategory(true)
+        }
+
+        binding.swipeCategoryDetail.setOnRefreshListener {
+            setupViewsForRefreshCategory()
+            viewModel.refreshCategoryDetails()
+        }
+    }
+
+    private fun setupViewsForRefreshAll() {
+        binding.swipeAll.isRefreshing = false
+        binding.swipeAll.isEnabled = false
+        binding.progressIndicator.visibility = View.VISIBLE
         binding.placeholderView.root.visibility = View.GONE
         binding.tabsRecycler.visibility = View.GONE
         binding.tabDetailsRecycler.visibility = View.GONE
     }
 
-    private fun setupListener() {
-        binding.swipeAll.setOnRefreshListener {
-            binding.swipeAll.isRefreshing = false
-            binding.swipeAll.isEnabled = false
-            binding.progressIndicator.visibility = View.VISIBLE
-            hideAllViews()
-
-            viewModel.getAllCategory(true)
-        }
-
-        binding.swipeCategoryDetail.setOnRefreshListener {
-            binding.swipeCategoryDetail.isRefreshing = false
-            binding.swipeCategoryDetail.isEnabled = false
-            binding.progressIndicator.visibility = View.VISIBLE
-            binding.tabDetailsRecycler.visibility = View.GONE
-            binding.placeholderView.root.visibility = View.GONE
-
-            viewModel.refreshCategoryDetails()
-        }
+    private fun setupViewsForRefreshCategory() {
+        binding.swipeCategoryDetail.isRefreshing = false
+        binding.swipeCategoryDetail.isEnabled = false
+        binding.progressIndicator.visibility = View.VISIBLE
+        binding.tabDetailsRecycler.visibility = View.GONE
+        binding.placeholderView.root.visibility = View.GONE
     }
 
     private fun initObservers() {
@@ -174,12 +169,16 @@ class MarketplaceFragment : Fragment(), MarketplaceCategoriesCallBack,
         }
     }
 
-    override fun showDataForClickedItem(tab: Category, rowIndex: Int) {
+    override fun setCategorySelected(rowIndex: Int) {
+        viewModel.setSelectedCategoryIndex(rowIndex)
+    }
+
+    override fun showDataForClickedItem(tab: Category) {
         binding.tabDetailsRecycler.visibility = View.GONE
         binding.placeholderView.root.visibility = View.GONE
         binding.progressIndicator.visibility = View.VISIBLE
-//        tabItemsAdapter.setTabDetails(emptyList())
-        viewModel.getCategoryDetails(tab.id, rowIndex)
+
+        viewModel.getCategoryDetails(tab.id)
     }
 
     override fun getCategoryItemDetails(categoryId: Int, itemId: Int, view: View) {
