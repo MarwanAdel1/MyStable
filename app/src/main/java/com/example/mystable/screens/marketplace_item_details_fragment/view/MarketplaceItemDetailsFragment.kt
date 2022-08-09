@@ -39,16 +39,11 @@ class MarketplaceItemDetailsFragment : Fragment(), MarketplaceItemDetailsSimilar
         itemId = MarketplaceItemDetailsFragmentArgs.fromBundle(requireArguments()).itemId
         categoryId = MarketplaceItemDetailsFragmentArgs.fromBundle(requireArguments()).categoryId
 
-        init()
-
-        viewModel.getItemDetails(categoryId, itemId)
-        viewModel.getSimilarItems(categoryId)
-
         return binding.root
     }
 
     private fun init() {
-        val viewsAdapter =
+        viewsAdapter =
             ViewsRecyclerAdapter(mutableListOf(), requireContext(), requireActivity(), this)
         binding.viewsRecyclerview.adapter = viewsAdapter
 
@@ -56,11 +51,15 @@ class MarketplaceItemDetailsFragment : Fragment(), MarketplaceItemDetailsSimilar
             MarketplaceItemDetailsViewModelFactory(MarketplaceRepo(MarketplaceDataSource()))
         viewModel =
             ViewModelProvider(this, viewModelFactory)[MarketplaceItemDetailsViewModel::class.java]
+
+        viewModel.getItemDetails(categoryId, itemId)
+        viewModel.getSimilarItems(categoryId)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        init()
         setupListeners()
         setupObservers()
     }
