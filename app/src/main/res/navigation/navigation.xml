@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/marketplaceFragment"
-        android:name="com.example.mystable.presentation.marketplace_fragment.view.MarketplaceFragment"
+        android:name="com.example.mystable.marketplace_category_fragment.presentation.view.MarketplaceFragment"
         android:label="MarketplaceFragment">
         <action
             android:id="@+id/action_marketplaceFragment_to_marketplaceItemDetailsFragment"
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/marketplaceItemDetailsFragment"
-        android:name="com.example.mystable.presentation.marketplace_item_details_fragment.view.MarketplaceItemDetailsFragment"
+        android:name="com.example.mystable.marketplace_post_details_fragment.presentation.view.MarketplaceItemDetailsFragment"
         android:label="MarketplaceItemDetailsFragment">
         <argument
             android:name="categoryId"

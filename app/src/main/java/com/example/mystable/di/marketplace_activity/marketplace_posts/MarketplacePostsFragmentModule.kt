@@ -1,0 +1,26 @@
+package com.example.mystable.di.marketplace_activity.marketplace_posts
+
+import com.example.mystable.di.marketplace_activity.marketplace_post_details.MarketplacePostDetailsFragmentScope
+import com.example.mystable.di.marketplace_activity.marketplace_posts.MarketplacePostsFragmentScope
+import com.example.mystable.marketplace_category_fragment.data.data_source.MarketplaceCategoryDataSource
+import com.example.mystable.marketplace_category_fragment.data.data_source.remote_source.RemoteMarketplaceCategoryDataSource
+import com.example.mystable.marketplace_category_fragment.data.repository.MarketplaceCategoryRepo
+import com.example.mystable.marketplace_category_fragment.domain.repository.IMarketplaceCategoryRepo
+import com.example.mystable.marketplace_post_details_fragment.data.data_source.MarketplacePostDetailsDataSource
+import com.example.mystable.marketplace_post_details_fragment.data.data_source.remote_source.RemoteMarketplacePostDetailsDataSource
+import com.example.mystable.marketplace_post_details_fragment.data.repository.MarketplacePostDetailsRepo
+import com.example.mystable.marketplace_post_details_fragment.domain.repository.IMarketplacePostDetailsRepo
+import dagger.Binds
+import dagger.Module
+
+@Module
+abstract class MarketplacePostsFragmentModule {
+    @MarketplacePostsFragmentScope
+    @Binds
+    abstract fun getMarketplaceCategoryDataSource(remoteMarketplaceDataSource: RemoteMarketplaceCategoryDataSource): MarketplaceCategoryDataSource
+
+
+    @MarketplacePostsFragmentScope
+    @Binds
+    abstract fun getMarketplaceCategoryRepo(remoteMarketplaceRepo: MarketplaceCategoryRepo): IMarketplaceCategoryRepo
+}
