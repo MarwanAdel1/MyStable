@@ -1,7 +1,7 @@
 package com.example.mystable.di
 
 import androidx.lifecycle.ViewModelProvider
-import com.example.mystable.DaggerViewModelFactory
+import com.example.mystable.modules.DaggerViewModelFactory
 import dagger.Binds
 import dagger.Module
 import javax.inject.Singleton
