@@ -1,13 +1,13 @@
 package com.example.mystable.modules.marketplace_post_details_fragment.data.data_source.remote_source
 
+import com.example.mystable.modules.marketplace_post_details_fragment.data.api.PostDetailsDataSourceService
+import com.example.mystable.modules.marketplace_post_details_fragment.data.data_source.MarketplacePostDetailsDataSource
 import com.example.mystable.modules.marketplace_post_details_fragment.data.model.ItemDetails
 import com.example.mystable.modules.marketplace_post_details_fragment.data.model.ItemSimilarItem
-import com.example.mystable.modules.marketplace_post_details_fragment.data.api.PostDetailsDataSource
-import com.example.mystable.modules.marketplace_post_details_fragment.data.data_source.MarketplacePostDetailsDataSource
 import kotlinx.coroutines.delay
 import javax.inject.Inject
 
-class RemoteMarketplacePostDetailsDataSource @Inject constructor(private val marketApi: PostDetailsDataSource):
+class RemoteMarketplacePostDetailsDataSource @Inject constructor(private val marketApi: PostDetailsDataSourceService) :
     MarketplacePostDetailsDataSource {
 
     override suspend fun getItemData(categoryId: Int, itemId: Int): ItemDetails? {

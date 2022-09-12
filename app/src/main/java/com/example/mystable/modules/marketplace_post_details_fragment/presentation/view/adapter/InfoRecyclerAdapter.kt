@@ -5,12 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mystable.databinding.ItemCategoryItemInfoFirstItemViewBinding
 import com.example.mystable.databinding.ItemCategoryItemInfoItemsViewBinding
-import com.example.mystable.modules.marketplace_post_details_fragment.data.model.ItemInfo
+import com.example.mystable.modules.marketplace_post_details_fragment.presentation.model.PostInfo
 import java.text.SimpleDateFormat
 import java.util.*
 
 class InfoRecyclerAdapter(
-    private var info: ItemInfo
+    private var info: PostInfo
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var infoData: List<Pair<String, Any>> = emptyList()
 

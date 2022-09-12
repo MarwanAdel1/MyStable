@@ -46,4 +46,7 @@ class AppModule {
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()
 
+    @Singleton
+    @Provides
+    fun provideContext(application: Application) = application.applicationContext!!
 }

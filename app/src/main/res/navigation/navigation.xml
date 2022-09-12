@@ -2,16 +2,16 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation.xml"
-    app:startDestination="@id/marketplaceFragment">
+    app:startDestination="@id/marketplacePostsFragment">
 
     <fragment
-        android:id="@+id/marketplaceFragment"
-        android:name="com.example.mystable.modules.marketplace_category_fragment.presentation.view.MarketplaceFragment"
-        android:label="MarketplaceFragment">
+        android:id="@+id/marketplacePostsFragment"
+        android:name="com.example.mystable.modules.marketplace_posts_fragment.presentation.view.MarketplacePostsFragment"
+        android:label="marketplacePostsFragment">
         <action
             android:id="@+id/action_marketplaceFragment_to_marketplaceItemDetailsFragment"
             app:destination="@id/marketplaceItemDetailsFragment"
-            app:popUpTo="@id/marketplaceFragment"
+            app:popUpTo="@id/marketplacePostsFragment"
             app:popUpToInclusive="false" />
     </fragment>
     <fragment

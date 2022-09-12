@@ -2,8 +2,8 @@ package com.example.mystable.modules
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.mystable.modules.marketplace_category_fragment.presentation.viewmodel.MarketPlaceViewModel
 import com.example.mystable.modules.marketplace_post_details_fragment.presentation.viewmodel.MarketplaceItemDetailsViewModel
+import com.example.mystable.modules.marketplace_posts_fragment.presentation.viewmodel.MarketPlaceViewModel
 import javax.inject.Inject
 
 class DaggerViewModelFactory @Inject constructor(

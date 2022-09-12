@@ -10,8 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mystable.R
 import com.example.mystable.databinding.*
-import com.example.mystable.modules.marketplace_post_details_fragment.data.model.*
-import com.example.mystable.modules.marketplace_post_details_fragment.presentation.view.MarketplaceItemDetailsSimilarItemCallback
+import com.example.mystable.modules.marketplace_post_details_fragment.presentation.model.*
+import com.example.mystable.modules.posts_adapter.presentation.adapter.PostsListAdapter
+import com.example.mystable.modules.posts_adapter.presentation.model.PostInfoAdapter
+import com.example.mystable.modules.posts_adapter.presentation.model.PostModel
+import com.example.mystable.modules.posts_adapter.presentation.view.PostsClickCallback
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
@@ -21,20 +24,21 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class ViewsRecyclerAdapter(
-    private var itemTypes: MutableList<ICategoryItemsData>,
+class ViewsRecyclerAdapter constructor(
     private val myContext: Context,
     private val myActivity: FragmentActivity,
-    private val similarItemsCallback: MarketplaceItemDetailsSimilarItemCallback
+    private val similarItemsCallback: PostsClickCallback
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    fun setViews(itemTypes: List<ICategoryItemsData>) {
+    private lateinit var itemTypes: MutableList<ICategoryPostDetailsUi>
+
+    fun setViews(itemTypes: List<ICategoryPostDetailsUi>) {
         this.itemTypes = itemTypes.toMutableList()
         notifyDataSetChanged()
     }
 
-    fun setSimilarItems(items: ItemSimilarItem) {
+    fun setSimilarItems(items: PostSimilarItemsUi) {
         this.itemTypes.add(items)
         notifyItemChanged(this.itemTypes.size - 1)
     }
@@ -42,39 +46,39 @@ class ViewsRecyclerAdapter(
     override fun getItemViewType(position: Int): Int {
         when (position) {
             0 -> {
-                if (itemTypes.any { it is ItemEssentialInfo }) {
+                if (itemTypes.any { it is PostEssentialInfo }) {
                     return 0
                 }
             }
             1 -> {
-                if (itemTypes.any { it is ItemImages }) {
+                if (itemTypes.any { it is PostImages }) {
                     return 1
                 }
             }
             2 -> {
-                if (itemTypes.any { it is ItemDescription }) {
+                if (itemTypes.any { it is PostDescription }) {
                     return 2
                 }
             }
             3 -> {
-                if (itemTypes.any { it is ItemOwner }) {
+                if (itemTypes.any { it is PostOwner }) {
                     return 3
                 }
             }
             4 -> {
-                if (itemTypes.any { it is ItemLocation }) {
+                if (itemTypes.any { it is PostLocation }) {
                     return 4
                 }
             }
             5 -> {
-                if (itemTypes.any { it is ItemInfo }) {
+                if (itemTypes.any { it is PostInfo }) {
                     return 5
-                } else if (itemTypes.any { it is ItemSimilarItem }) {
+                } else if (itemTypes.any { it is PostSimilarItemsUi }) {
                     return 6
                 }
             }
             6 -> {
-                if (itemTypes.any { it is ItemSimilarItem }) {
+                if (itemTypes.any { it is PostSimilarItemsUi }) {
                     return 6
                 }
             }
@@ -140,23 +144,27 @@ class ViewsRecyclerAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is ItemEssentialInfoViewHolder -> holder.bind(itemTypes.first { it is ItemEssentialInfo } as ItemEssentialInfo)
-            is ItemImagesViewHolder -> holder.bind(itemTypes.first { it is ItemImages } as ItemImages)
-            is ItemDescriptionViewHolder -> holder.bind(itemTypes.first { it is ItemDescription } as ItemDescription)
-            is ItemOwnerViewHolder -> holder.bind(itemTypes.first { it is ItemOwner } as ItemOwner)
-            is ItemMapViewHolder -> holder.bind(itemTypes.first { it is ItemLocation } as ItemLocation)
-            is ItemInfoViewHolder -> holder.bind(itemTypes.first { it is ItemInfo } as ItemInfo)
-            is SimilarItemsViewHolder -> holder.bind(itemTypes.first { it is ItemSimilarItem } as ItemSimilarItem)
+            is ItemEssentialInfoViewHolder -> holder.bind(itemTypes.first { it is PostEssentialInfo } as PostEssentialInfo)
+            is ItemImagesViewHolder -> holder.bind(itemTypes.first { it is PostImages } as PostImages)
+            is ItemDescriptionViewHolder -> holder.bind(itemTypes.first { it is PostDescription } as PostDescription)
+            is ItemOwnerViewHolder -> holder.bind(itemTypes.first { it is PostOwner } as PostOwner)
+            is ItemMapViewHolder -> holder.bind(itemTypes.first { it is PostLocation } as PostLocation)
+            is ItemInfoViewHolder -> holder.bind(itemTypes.first { it is PostInfo } as PostInfo)
+            is SimilarItemsViewHolder -> holder.bind(itemTypes.first { it is PostSimilarItemsUi } as PostSimilarItemsUi)
         }
     }
 
     override fun getItemCount(): Int {
-        return itemTypes.size
+        var size = 0
+        if (::itemTypes.isInitialized) {
+            size = itemTypes.size
+        }
+        return size
     }
 
     inner class ItemEssentialInfoViewHolder(private val binding: ItemCategoryItemEssentialInfoBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(info: ItemEssentialInfo) {
+        fun bind(info: PostEssentialInfo) {
             binding.itemName.text = info.name
             binding.itemPrice.text = "${info.currencySymbol} ${info.price}"
             binding.itemEndTime.text =
@@ -170,7 +178,7 @@ class ViewsRecyclerAdapter(
 
     inner class ItemImagesViewHolder(private val binding: ItemCategoryItemImagesBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(images: ItemImages) {
+        fun bind(images: PostImages) {
             val imagesAdapter = ItemImagesRecyclerAdapter(myContext, images)
             binding.imagesRecyclerview.adapter = imagesAdapter
         }
@@ -178,14 +186,14 @@ class ViewsRecyclerAdapter(
 
     inner class ItemDescriptionViewHolder(private val binding: ItemCategoryItemDescriptionBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(desc: ItemDescription) {
+        fun bind(desc: PostDescription) {
             binding.descriptionTx.text = desc.description
         }
     }
 
     inner class ItemInfoViewHolder(private val binding: ItemCategoryItemInfoBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(info: ItemInfo) {
+        fun bind(info: PostInfo) {
             val infoRecyclerAdapter = InfoRecyclerAdapter(info)
             binding.itemInfoRecyclerView.adapter = infoRecyclerAdapter
             if (info.infoStatus) {
@@ -198,7 +206,7 @@ class ViewsRecyclerAdapter(
 
     inner class ItemMapViewHolder(private val binding: ItemCategoryItemLocationDetailsBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(location: ItemLocation) {
+        fun bind(location: PostLocation) {
             binding.locationDescriptionTx.text = location.locationDescription
 
             initializeMap(location.location)
@@ -223,7 +231,7 @@ class ViewsRecyclerAdapter(
 
     inner class ItemOwnerViewHolder(private val binding: ItemCategoryItemOwnerOrSoldBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(owner: ItemOwner) {
+        fun bind(owner: PostOwner) {
             if (owner.soldStatus) { // sold out
                 changeVisibility(owner.soldStatus)
             } else {
@@ -276,15 +284,35 @@ class ViewsRecyclerAdapter(
 
     inner class SimilarItemsViewHolder(private val binding: ItemCategoryItemSimilarItemsBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(similarItem: ItemSimilarItem) {
-            val similarItemAdapter = SimilarItemAdapter(
-                myContext, ItemSimilarItem(
-                    similarItem.categoryId,
-                    similarItem.items
-                ),
+        fun bind(similarItem: PostSimilarItemsUi) {
+            val similarItemAdapter = PostsListAdapter(
+                myContext,
                 similarItemsCallback
             )
             binding.similarItemsRecyclerview.adapter = similarItemAdapter
+
+            similarItemAdapter.setTabDetails(toPostModel(similarItem))
+        }
+
+        private fun toPostModel(similarPosts: PostSimilarItemsUi): PostModel {
+            val posts = mutableListOf<PostInfoAdapter>()
+
+            similarPosts.posts.forEach {
+                val post = PostInfoAdapter(
+                    id = it.id,
+                    name = it.name,
+                    imageUrl = it.imageUrl,
+                    currencySymbol = it.currencySymbol,
+                    price = it.price
+                )
+
+                posts.add(post)
+            }
+
+            return PostModel(
+                categoryId = similarPosts.categoryId,
+                posts = posts
+            )
         }
     }
 }

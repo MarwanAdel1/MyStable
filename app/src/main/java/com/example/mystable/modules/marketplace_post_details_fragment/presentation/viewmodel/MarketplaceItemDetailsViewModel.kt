@@ -4,10 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mystable.modules.marketplace_post_details_fragment.domain.usecases.GetSimilarPosts
-import com.example.mystable.modules.marketplace_post_details_fragment.data.model.ItemDetails
-import com.example.mystable.modules.marketplace_post_details_fragment.data.model.ItemSimilarItem
 import com.example.mystable.modules.marketplace_post_details_fragment.domain.usecases.GetPostDetails
+import com.example.mystable.modules.marketplace_post_details_fragment.domain.usecases.GetSimilarPosts
+import com.example.mystable.modules.marketplace_post_details_fragment.presentation.mapper.PostDetailsUiMapper
+import com.example.mystable.modules.marketplace_post_details_fragment.presentation.model.PostDetailsUiModel
+import com.example.mystable.modules.marketplace_post_details_fragment.presentation.model.PostSimilarItemsUi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -20,12 +21,12 @@ class MarketplaceItemDetailsViewModel @Inject constructor(
     ViewModel() {
     private var categoryDetailsJob: Job? = null
 
-    private val itemDataMutableLiveData = MutableLiveData<ItemDetails?>()
-    val itemDataLiveData: LiveData<ItemDetails?>
+    private val itemDataMutableLiveData = MutableLiveData<PostDetailsUiModel?>()
+    val itemDataLiveData: LiveData<PostDetailsUiModel?>
         get() = itemDataMutableLiveData
 
-    private var similarItemsMutableLiveData = MutableLiveData<ItemSimilarItem?>()
-    val similarItemsLiveData: LiveData<ItemSimilarItem?>
+    private var similarItemsMutableLiveData = MutableLiveData<PostSimilarItemsUi?>()
+    val similarItemsLiveData: LiveData<PostSimilarItemsUi?>
         get() = similarItemsMutableLiveData
 
 
@@ -33,7 +34,7 @@ class MarketplaceItemDetailsViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             val data = getPostDetails.execute(categoryId, itemId)
 
-            itemDataMutableLiveData.postValue(data)
+            itemDataMutableLiveData.postValue(PostDetailsUiMapper.toPostDetailsUiModel(data))
         }
     }
 
@@ -42,7 +43,7 @@ class MarketplaceItemDetailsViewModel @Inject constructor(
         categoryDetailsJob = viewModelScope.launch(Dispatchers.IO) {
             val details = getSimilarPosts.execute(id)
 
-            similarItemsMutableLiveData.postValue(details)
+            similarItemsMutableLiveData.postValue(PostDetailsUiMapper.toPostSimilarItemUiModel(details))
         }
     }
 }

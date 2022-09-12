@@ -1,0 +1,3 @@
+package com.example.mystable.modules.marketplace_post_details_fragment.domain.model
+
+interface ICategoryPostDetailsDomain

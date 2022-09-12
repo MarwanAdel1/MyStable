@@ -7,17 +7,17 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mystable.modules.DaggerViewModelFactory
 import com.example.mystable.R
 import com.example.mystable.databinding.FragmentMarketplaceItemDetailsBinding
-import com.example.mystable.modules.marketplace_category_fragment.data.model.CategoryItemData
+import com.example.mystable.modules.DaggerViewModelFactory
 import com.example.mystable.modules.marketplace_post_details_fragment.presentation.view.adapter.ViewsRecyclerAdapter
 import com.example.mystable.modules.marketplace_post_details_fragment.presentation.viewmodel.MarketplaceItemDetailsViewModel
+import com.example.mystable.modules.posts_adapter.presentation.view.PostsClickCallback
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
 
-class MarketplaceItemDetailsFragment : DaggerFragment(), MarketplaceItemDetailsSimilarItemCallback {
+class MarketplaceItemDetailsFragment : DaggerFragment(), PostsClickCallback {
     private lateinit var binding: FragmentMarketplaceItemDetailsBinding
 
     @Inject
@@ -45,7 +45,7 @@ class MarketplaceItemDetailsFragment : DaggerFragment(), MarketplaceItemDetailsS
 
     private fun init() {
         viewsAdapter =
-            ViewsRecyclerAdapter(mutableListOf(), requireContext(), requireActivity(), this)
+            ViewsRecyclerAdapter(requireContext(), requireActivity(), this)
         binding.viewsRecyclerview.adapter = viewsAdapter
 
 
@@ -76,7 +76,7 @@ class MarketplaceItemDetailsFragment : DaggerFragment(), MarketplaceItemDetailsS
 
         binding.backBt.setOnClickListener {
             it.findNavController()
-                .popBackStack(R.id.marketplaceFragment, false)
+                .popBackStack(R.id.marketplacePostsFragment, false)
         }
 
         binding.viewsRecyclerview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -94,7 +94,7 @@ class MarketplaceItemDetailsFragment : DaggerFragment(), MarketplaceItemDetailsS
     private fun setupObservers() {
         viewModel.itemDataLiveData.observe(viewLifecycleOwner) {
             it?.let { data ->
-                viewsAdapter.setViews(data.itemData)
+                viewsAdapter.setViews(data.postDetails)
                 binding.progressIndicator.visibility = View.GONE
             }
         }
@@ -107,7 +107,7 @@ class MarketplaceItemDetailsFragment : DaggerFragment(), MarketplaceItemDetailsS
         }
     }
 
-    override fun getSimilarItemDetails(categoryId: Int, itemDetails: CategoryItemData, view: View) {
+    override fun getPostDetails(categoryId: Int, itemId: Int, view: View) {
         // used to navigate to item selected
     }
 }

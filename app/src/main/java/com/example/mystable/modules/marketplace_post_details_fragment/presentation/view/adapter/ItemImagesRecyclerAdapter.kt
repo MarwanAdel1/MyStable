@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mystable.R
 import com.example.mystable.databinding.ItemCategoryItemImagesItemBinding
-import com.example.mystable.modules.marketplace_post_details_fragment.data.model.ItemImages
+import com.example.mystable.modules.marketplace_post_details_fragment.presentation.model.PostImages
 
 class ItemImagesRecyclerAdapter(
     private val myContext: Context,
-    private var images: ItemImages
+    private var images: PostImages
 ) : RecyclerView.Adapter<ItemImagesRecyclerAdapter.ItemImageViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemImageViewHolder {
